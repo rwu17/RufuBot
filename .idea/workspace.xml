@@ -82,8 +82,8 @@
       <file leaf-file-name="MouseMover.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MouseMover.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="58">
-              <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+            <state relative-caret-position="493">
+              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -305,7 +305,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1647000" />
+    <option name="totallyTimeSpent" value="1665000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="953" y="0" width="974" height="1057" extended-state="0" />
@@ -805,8 +805,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/MouseMover.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="2" column="23" lean-forward="false" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        <state relative-caret-position="493">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
