@@ -23,14 +23,6 @@ public class AutoClickerMain {
             e.printStackTrace();
         }
 
-        /*
-        try {
-            Thread.sleep(3000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
-
         robot.delay(3000);
 
         AutoClicker clicker = new AutoClicker();
