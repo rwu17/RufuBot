@@ -101,158 +101,366 @@ public class AutoTyper {
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'a' || ch[i] == 'A') {
+            if (ch[i] == 'a') {
                 rb.keyPress(KeyEvent.VK_A);
                 rb.keyRelease(KeyEvent.VK_A);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'b' || ch[i] == 'B') {
+            if (ch[i] == 'b') {
                 rb.keyPress(KeyEvent.VK_B);
                 rb.keyRelease(KeyEvent.VK_B);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'c' || ch[i] == 'C') {
+            if (ch[i] == 'c') {
                 rb.keyPress(KeyEvent.VK_C);
                 rb.keyRelease(KeyEvent.VK_C);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'd' || ch[i] == 'D') {
+            if (ch[i] == 'd') {
                 rb.keyPress(KeyEvent.VK_D);
                 rb.keyRelease(KeyEvent.VK_D);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'e' || ch[i] == 'E') {
+            if (ch[i] == 'e') {
                 rb.keyPress(KeyEvent.VK_E);
                 rb.keyRelease(KeyEvent.VK_E);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'f' || ch[i] == 'F') {
+            if (ch[i] == 'f') {
                 rb.keyPress(KeyEvent.VK_F);
                 rb.keyRelease(KeyEvent.VK_F);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'g' || ch[i] == 'G') {
+            if (ch[i] == 'g') {
                 rb.keyPress(KeyEvent.VK_G);
                 rb.keyRelease(KeyEvent.VK_G);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'h' || ch[i] == 'H') {
+            if (ch[i] == 'h') {
                 rb.keyPress(KeyEvent.VK_H);
                 rb.keyRelease(KeyEvent.VK_H);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'i' || ch[i] == 'I') {
+            if (ch[i] == 'i') {
                 rb.keyPress(KeyEvent.VK_I);
                 rb.keyRelease(KeyEvent.VK_I);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'j' || ch[i] == 'J') {
+            if (ch[i] == 'j') {
                 rb.keyPress(KeyEvent.VK_J);
                 rb.keyRelease(KeyEvent.VK_J);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'k' || ch[i] == 'K') {
+            if (ch[i] == 'k') {
                 rb.keyPress(KeyEvent.VK_K);
                 rb.keyRelease(KeyEvent.VK_K);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'l' || ch[i] == 'L') {
+            if (ch[i] == 'l') {
                 rb.keyPress(KeyEvent.VK_L);
                 rb.keyRelease(KeyEvent.VK_L);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'm' || ch[i] == 'M') {
+            if (ch[i] == 'm') {
                 rb.keyPress(KeyEvent.VK_M);
                 rb.keyRelease(KeyEvent.VK_M);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'n' || ch[i] == 'N') {
+            if (ch[i] == 'n') {
                 rb.keyPress(KeyEvent.VK_N);
                 rb.keyRelease(KeyEvent.VK_N);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'o' || ch[i] == 'O') {
+            if (ch[i] == 'o') {
                 rb.keyPress(KeyEvent.VK_O);
                 rb.keyRelease(KeyEvent.VK_O);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'p' || ch[i] == 'P') {
+            if (ch[i] == 'p') {
                 rb.keyPress(KeyEvent.VK_P);
                 rb.keyRelease(KeyEvent.VK_P);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'q' || ch[i] == 'Q') {
+            if (ch[i] == 'q') {
                 rb.keyPress(KeyEvent.VK_Q);
                 rb.keyRelease(KeyEvent.VK_Q);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'r' || ch[i] == 'R') {
+            if (ch[i] == 'r') {
                 rb.keyPress(KeyEvent.VK_R);
                 rb.keyRelease(KeyEvent.VK_R);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 's' || ch[i] == 'S') {
+            if (ch[i] == 's') {
                 rb.keyPress(KeyEvent.VK_S);
                 rb.keyRelease(KeyEvent.VK_S);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 't' || ch[i] == 'T') {
+            if (ch[i] == 't') {
                 rb.keyPress(KeyEvent.VK_T);
                 rb.keyRelease(KeyEvent.VK_T);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'u' || ch[i] == 'U') {
+            if (ch[i] == 'u') {
                 rb.keyPress(KeyEvent.VK_U);
                 rb.keyRelease(KeyEvent.VK_U);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'v' || ch[i] == 'V') {
+            if (ch[i] == 'v') {
                 rb.keyPress(KeyEvent.VK_V);
                 rb.keyRelease(KeyEvent.VK_V);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'w' || ch[i] == 'W') {
+            if (ch[i] == 'w') {
                 rb.keyPress(KeyEvent.VK_W);
                 rb.keyRelease(KeyEvent.VK_W);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'x' || ch[i] == 'X') {
+            if (ch[i] == 'x') {
                 rb.keyPress(KeyEvent.VK_X);
                 rb.keyRelease(KeyEvent.VK_X);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'y' || ch[i] == 'Y') {
+            if (ch[i] == 'y') {
                 rb.keyPress(KeyEvent.VK_Y);
                 rb.keyRelease(KeyEvent.VK_Y);
                 rb.delay(delay);
             }
 
-            if (ch[i] == 'z' || ch[i] == 'Z') {
+            if (ch[i] == 'z') {
                 rb.keyPress(KeyEvent.VK_Z);
+                rb.keyRelease(KeyEvent.VK_Z);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'A') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_A);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_A);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'B') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_B);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_B);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'C') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_C);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_C);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'D') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_D);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_D);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'E') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_E);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_E);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'F') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_F);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_F);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'G') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_G);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_G);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'H') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_H);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_H);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'I') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_I);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_I);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'J') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_J);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_J);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'K') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_K);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_K);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'L') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_L);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_L);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'M') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_M);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_M);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'N') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_N);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_N);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'O') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_O);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_O);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'P') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_P);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_P);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'Q') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_Q);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_Q);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'R') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_R);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_R);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'S') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_S);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_S);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'T') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_T);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_T);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'U') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_U);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_U);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'V') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_V);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_V);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'W') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_W);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_W);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'X') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_X);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_X);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'Y') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_Y);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_Y);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == 'Z') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_Z);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
                 rb.keyRelease(KeyEvent.VK_Z);
                 rb.delay(delay);
             }
@@ -271,8 +479,24 @@ public class AutoTyper {
                 rb.delay(delay);
             }
 
+            if (ch[i] == ';') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_COMMA);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_COMMA);
+                rb.delay(delay);
+            }
+
             if (ch[i] == '.') {
                 rb.keyPress(KeyEvent.VK_PERIOD);
+                rb.keyRelease(KeyEvent.VK_PERIOD);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == ':') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_PERIOD);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
                 rb.keyRelease(KeyEvent.VK_PERIOD);
                 rb.delay(delay);
             }
@@ -355,13 +579,6 @@ public class AutoTyper {
                 rb.delay(delay);
             }
 
-            if (ch[i] == ':') {
-                rb.keyPress(KeyEvent.VK_SHIFT);
-                rb.keyPress(KeyEvent.VK_PERIOD);
-                rb.keyRelease(KeyEvent.VK_SHIFT);
-                rb.keyRelease(KeyEvent.VK_PERIOD);
-                rb.delay(delay);
-            }
             /*
             if (ch[i] == '') {
                 rb.keyPress();
