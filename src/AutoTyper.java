@@ -2,6 +2,7 @@ import java.awt.Robot;
 import java.awt.AWTException;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.security.Key;
 import java.util.Scanner;
 
 public class AutoTyper {
@@ -275,6 +276,99 @@ public class AutoTyper {
                 rb.keyRelease(KeyEvent.VK_PERIOD);
                 rb.delay(delay);
             }
+
+            if (ch[i] == '?') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_PLUS);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_PLUS);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '=') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_0);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_0);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '!') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_1);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_1);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '"') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_2);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_2);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '#') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_3);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_3);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '%') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_5);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_5);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '&') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_6);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_6);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '/') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_7);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_7);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '-') {
+                rb.keyPress(KeyEvent.VK_MINUS);
+                rb.keyRelease(KeyEvent.VK_MINUS);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == '_') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_MINUS);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_MINUS);
+                rb.delay(delay);
+            }
+
+            if (ch[i] == ':') {
+                rb.keyPress(KeyEvent.VK_SHIFT);
+                rb.keyPress(KeyEvent.VK_PERIOD);
+                rb.keyRelease(KeyEvent.VK_SHIFT);
+                rb.keyRelease(KeyEvent.VK_PERIOD);
+                rb.delay(delay);
+            }
+            /*
+            if (ch[i] == '') {
+                rb.keyPress();
+                rb.keyRelease();
+                rb.delay(delay);
+            }
+            */
         }
 
         rb.delay(3000);
