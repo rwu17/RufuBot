@@ -14,7 +14,7 @@ public class Mover {
     }
 
     void createRange() {
-        
+
     }
 
     void proceed(Double xCoord, Double yCoord) {

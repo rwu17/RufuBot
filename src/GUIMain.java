@@ -1,9 +1,9 @@
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -12,26 +12,13 @@ import java.util.Formatter;
 
 public class GUIMain extends javafx.application.Application{
 
-    Formatter profiles = new Formatter();
+    static Stage PrimaryStage;
 
-
-    static Stage primaryStage;
-
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage){
+        PrimaryStage = primaryStage;
         primaryStage.setTitle("RufuBot");
-
-        VBox root = new VBox(5.0);
-        root.setAlignment(Pos.CENTER);
-
-        root.setPadding(new Insets(20));
-
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-        primaryStage.setX(screenSize.width / 2 - (600 / 2));
-        primaryStage.setY(screenSize.height / 2 - (400 / 2));
-
+        primaryStage.setScene(GenerateScene());
         primaryStage.show();
-
     }
 
     private Scene GenerateScene() {
@@ -40,11 +27,15 @@ public class GUIMain extends javafx.application.Application{
         ScrollPane scrl = new ScrollPane();
 
         GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
         grid.setPadding(new Insets(20));
         grid.setHgap(5);
         grid.setVgap(5);
         grid.setMinWidth(260);
-        return null;
+
+
+
+        return new Scene(root, 800, 600);
     }
 
 }
