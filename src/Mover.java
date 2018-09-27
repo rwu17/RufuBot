@@ -3,22 +3,18 @@ import java.util.Objects;
 
 public class Mover {
 
-    Double xCoord, yCoord;
-
-    public Double getxCoord() {
-        return xCoord;
-    }
+    private Double xCoord, yCoord;
 
     public void setxCoord(Double xCoord) {
         this.xCoord = xCoord;
     }
 
-    public Double getyCoord() {
-        return yCoord;
-    }
-
     public void setyCoord(Double yCoord) {
         this.yCoord = yCoord;
+    }
+
+    void createRange() {
+        
     }
 
     void proceed(Double xCoord, Double yCoord) {

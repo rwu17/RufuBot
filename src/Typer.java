@@ -6,7 +6,10 @@ import java.security.Key;
 import java.util.Scanner;
 
 public class Typer {
-    public static void main(String[] args) {
+
+
+
+    void proceed() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the text: ");
         String string = scanner.nextLine();
@@ -14,22 +17,24 @@ public class Typer {
         System.out.println("Enter delay between typing in millisecond: ");
         int delay = scanner.nextInt();
 
-        System.out.println("Program will start in 3 seconds.");
-
         Robot rb = null;
         try {
             rb = new Robot();
         } catch (AWTException e) {
             e.printStackTrace();
         }
+
+        /*
         Runtime rt = Runtime.getRuntime();
+
         try {
             rt.exec("notepad.exe");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
 
-        rb.delay(3000);
+        rb.delay(3000); //Start in 3 seconds
 
         char ch[] = string.toCharArray();
 
@@ -579,7 +584,7 @@ public class Typer {
                 rb.delay(delay);
             }
 
-            /*
+            /* Template
             if (ch[i] == '') {
                 rb.keyPress();
                 rb.keyRelease();
