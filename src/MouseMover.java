@@ -21,29 +21,6 @@ public class MouseMover {
         this.yCoord = yCoord;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MouseMover)) return false;
-        MouseMover that = (MouseMover) o;
-        return getxCoord() == that.getxCoord() &&
-                getyCoord() == that.getyCoord();
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(getxCoord(), getyCoord());
-    }
-
-    @Override
-    public String toString() {
-        return "MouseMover{" +
-                "xCoord=" + xCoord +
-                ", yCoord=" + yCoord +
-                '}';
-    }
-
     void proceed(Double xCoord, Double yCoord) {
 
         int x = (int) Math.round(xCoord);

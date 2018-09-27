@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Formatter;
 
 public class Profile extends Command{
+
+    Formatter profileList;
 
     String profileName;
 
@@ -12,7 +15,14 @@ public class Profile extends Command{
         this.profileName = profileName;
     }
 
-    static void CreateProfileDocument() {
+    void CreateProfileDocument() {
+        try {
+            profileList = new Formatter("Profiles.txt");
+        } catch (Exception e) {
+            System.out.println("Error on file creation");
+        }
+
+        profileList.close();
 
     }
 
