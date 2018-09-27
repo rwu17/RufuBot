@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.Objects;
 
-public class MouseMover {
+public class Mover {
 
     Double xCoord, yCoord;
 

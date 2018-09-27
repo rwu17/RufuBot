@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.event.InputEvent;
 
-public class AutoClicker {
+public class Clicker {
 
     private Robot robot;
     private int delay;
@@ -20,13 +20,13 @@ public class AutoClicker {
 
         //robot.delay(3000); //Start in 3 seconds
 
-        AutoClicker clicker = new AutoClicker();
+        Clicker clicker = new Clicker();
         clicker.setDelay(delay);
 
         clicker.clickMouse(InputEvent.BUTTON1_DOWN_MASK);
     }
 /*
-    public AutoClicker() {
+    public Clicker() {
         try {
             robot = new Robot();
         } catch (Exception e) {

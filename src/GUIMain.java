@@ -8,8 +8,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.util.Formatter;
 
 public class GUIMain extends javafx.application.Application{
+
+    Formatter profiles = new Formatter();
+
+
     static Stage primaryStage;
 
     public void start(Stage primaryStage) throws Exception {

@@ -1,9 +1,8 @@
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Scanner;
 
 public class Profile extends Command{
-
-    Formatter profileList;
 
     String profileName;
 
@@ -11,19 +10,26 @@ public class Profile extends Command{
 
     ArrayList<Command> Commands = new ArrayList<>();
 
+    private Scanner profile;
+
     public Profile(String profileName) {
         this.profileName = profileName;
+        this.CreateProfileDocument(profileName);
     }
 
-    void CreateProfileDocument() {
+    void CreateProfileDocument(String profileName) {
         try {
-            profileList = new Formatter("Profiles.txt");
+            profile = new Scanner( profileName + ".txt");
         } catch (Exception e) {
-            System.out.println("Error on file creation");
+            System.out.println("Could not find file");
         }
+    }
 
-        profileList.close();
+    void loadProfile(String profileName) {
+        while(profile.hasNext()) {
+            String line = profile.nextLine();
 
+        }
     }
 
     void CreateProfile(String profileName) {
@@ -35,10 +41,6 @@ public class Profile extends Command{
 
     void DeleteProfile(String profileName) {
         Profiles.remove(profileName);
-    }
-
-    static void loadProfile() {
-
     }
 
     @Override

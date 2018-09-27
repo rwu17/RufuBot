@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.security.Key;
 import java.util.Scanner;
 
-public class AutoTyper {
+public class Typer {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the text: ");

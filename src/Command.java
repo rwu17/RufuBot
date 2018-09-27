@@ -1,7 +1,5 @@
 public class Command {
 
-
-
     void createCommand() {
 
     }
