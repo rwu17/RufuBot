@@ -69,8 +69,9 @@ public class GUIMain extends javafx.application.Application{
                             Optional<ButtonType> confirm = nameTaken.showAndWait();
                         }
                         else {
-                            Profile.CreateProfile(name, Profiles);
                             profiles.getItems().add(name);
+                            Profile.CreateProfile(name, Profiles);
+                            //Profile.CreateProfileDocument(name);
                         }
                     }
                 } catch (IOException e) {

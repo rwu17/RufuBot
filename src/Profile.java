@@ -1,7 +1,9 @@
 import javafx.scene.control.ChoiceBox;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.Scanner;
 
 public class Profile extends Command{
@@ -17,11 +19,11 @@ public class Profile extends Command{
         this.CreateProfileDocument(profileName);
     }
 
-    void CreateProfileDocument(String profileName) {
+    static void CreateProfileDocument(String profileName) {
         try {
-            profile = new Scanner( profileName + ".txt");
-        } catch (Exception e) {
-            System.out.println("Could not find file");
+            Formatter profile = new Formatter(profileName + ".txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -47,6 +49,16 @@ public class Profile extends Command{
     static void DeleteProfile(String profileName, ArrayList<String> Profiles) throws IOException {
 
         Profiles.remove(profileName);
+
+        /*
+        File file = new File(profileName + ".txt");
+
+        if (file.delete()) {
+            System.out.println(file.getName() + " is deleted.");
+        } else {
+            System.out.println("Operation failed");
+        }
+        */
 
         File profiles = new File("Profiles.txt");
         FileWriter fw = new FileWriter(profiles, false);
