@@ -43,13 +43,17 @@ public class GUIMain extends javafx.application.Application{
 
         Button newProfile = new Button("New Profile");
 
+        newProfile.setOnAction(event -> {
+            
+        });
+
         Button deleteProfile = new Button("Delete Profile");
 
         Button editProfile = new Button("Edit Profile");
 
         Button apply = new Button("Apply");
 
-        apply.setOnAction(even -> {
+        apply.setOnAction(event -> {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("RufuBot");
             confirm.setHeaderText(null);
