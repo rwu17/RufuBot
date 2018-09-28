@@ -1,15 +1,12 @@
+import javafx.scene.control.ChoiceBox;
+
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Formatter;
 import java.util.Scanner;
 
 public class Profile extends Command{
 
     String profileName;
-
-    ArrayList<Profile> Profiles = new ArrayList<>();
 
     ArrayList<Command> Commands = new ArrayList<>();
 
@@ -35,31 +32,44 @@ public class Profile extends Command{
         }
     }
 
-    static void CreateProfile(String profileName) throws IOException {
+    static void CreateProfile(String profileName, ArrayList<String> Profiles) throws IOException {
 
         File profiles = new File("Profiles.txt");
-        FileWriter fr = new FileWriter(profiles, true);
-        BufferedWriter br = new BufferedWriter(fr);
-        br.write(profileName + "\n");
+        FileWriter fw = new FileWriter(profiles, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        Profiles.add(profileName);
+        bw.write(profileName + "\n");
 
-        br.close();
-        fr.close();
+        bw.close();
+        fw.close();
     }
 
-    static void DeleteProfile(String profileName) throws IOException {
-        Scanner match = new Scanner(System.in);
-        File profiles = new File("Profiles.txt");
-        BufferedReader br = new BufferedReader(new FileReader(profiles));
-        PrintWriter pw = new PrintWriter(new FileWriter(profiles));
+    static void DeleteProfile(String profileName, ArrayList<String> Profiles) throws IOException {
 
-        while (match.hasNext()) {
-            if (match.equals(profileName)) {
-                pw.println(profileName);
-                pw.flush();
-            }
+        Profiles.remove(profileName);
+
+        File profiles = new File("Profiles.txt");
+        FileWriter fw = new FileWriter(profiles, false);
+        BufferedWriter bw = new BufferedWriter(fw);
+
+        for (String x: Profiles) {
+            bw.write(x + "\n");
         }
 
-        pw.close();
+        bw.close();
+        fw.close();
+    }
+
+    static void LoadProfiles(ChoiceBox<String> profiles, ArrayList<String> Profiles) throws IOException {
+        String line;
+        File profilesList = new File("Profiles.txt");
+        BufferedReader br = new BufferedReader(new FileReader(profilesList));
+        while ((line = br.readLine()) != null) {
+            Profiles.add(line);
+            if (!(profiles.getItems().contains(line))) {
+                profiles.getItems().add(line);
+            }
+        }
         br.close();
     }
 
