@@ -1,4 +1,4 @@
-import java.nio.file.Files;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -15,24 +15,6 @@ public class Profile extends Command{
 
     private Scanner profile;
 
-    static Formatter CreateProfileList() {
-
-        Formatter profiles_txt;
-
-        Path profiles = Paths.get("Profiles.txt");
-
-        try {
-            profiles_txt = new Formatter("Profiles.txt");
-            profiles_txt.format("Profiles: \n");
-            profiles_txt.close();
-
-        } catch (Exception e) {
-            System.out.println("Error on file creation.");
-        }
-
-        return profiles_txt;
-    }
-
     public Profile(String profileName) {
         this.profileName = profileName;
         this.CreateProfileDocument(profileName);
@@ -46,8 +28,6 @@ public class Profile extends Command{
         }
     }
 
-
-
     void loadProfile(String profileName) {
         while(profile.hasNext()) {
             String line = profile.nextLine();
@@ -55,19 +35,32 @@ public class Profile extends Command{
         }
     }
 
-    static void CreateProfile(String profileName) {
+    static void CreateProfile(String profileName) throws IOException {
 
-        Formatter addProfile = Profile.CreateProfileList();
+        File profiles = new File("Profiles.txt");
+        FileWriter fr = new FileWriter(profiles, true);
+        BufferedWriter br = new BufferedWriter(fr);
+        br.write(profileName + "\n");
 
-        Profile name = new Profile(profileName);
-
-        addProfile.format();
-
-
+        br.close();
+        fr.close();
     }
 
-    void DeleteProfile(String profileName) {
-        Profiles.remove(profileName);
+    void DeleteProfile(String profileName) throws IOException {
+        Scanner match = new Scanner(System.in);
+        File profiles = new File("Profiles.txt");
+        BufferedReader br = new BufferedReader(new FileReader(profiles));
+        PrintWriter pw = new PrintWriter(new FileWriter(profiles));
+
+        while (match.hasNext()) {
+            if (match.equals(profileName)) {
+                pw.println(profileName);
+                pw.flush();
+            }
+        }
+
+        pw.close();
+        br.close();
     }
 
     @Override
