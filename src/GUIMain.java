@@ -25,25 +25,23 @@ public class GUIMain extends javafx.application.Application{
     }
 
     private Scene GenerateScene() {
-        VBox root = new VBox();
-        SplitPane splt = new SplitPane();
-        ScrollPane scrl = new ScrollPane();
 
         GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setPadding(new Insets(20));
-        grid.setHgap(5);
-        grid.setVgap(5);
-        grid.setMinWidth(260);
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setVgap(8);
+        grid.setHgap(10);
+        //grid.setAlignment(Pos.CENTER);
 
-        Label profile = new Label("Profile");
-        //Print the lable
+        Scene scene = new Scene(grid, 800, 600);
+
+        Label profile = new Label("Profiles");
+        GridPane.setConstraints(profile, 0, 0);
 
         ChoiceBox<String> profiles = new ChoiceBox<>();
+        GridPane.setConstraints(profiles, 0, 1);
         /*
         profiles.getItems().add();
-         */
-
+        */
         Button proceed = new Button("Proceed");
 
         Button newProfile = new Button("New Profile");
@@ -75,7 +73,18 @@ public class GUIMain extends javafx.application.Application{
         deleteProfile.setOnAction(event -> {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("RufuBot");
-            
+            confirm.setHeaderText(null);
+            confirm.setContentText("Sure you want to delete the selected profile?");
+            Optional<ButtonType> answer = confirm.showAndWait();
+
+            if (answer.isPresent() && answer.get() == ButtonType.OK){
+                try {
+                    Profile.DeleteProfile(profiles.getSelectionModel().getSelectedItem());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
         });
 
         Button editProfile = new Button("Edit Profile");
@@ -96,21 +105,13 @@ public class GUIMain extends javafx.application.Application{
         ChoiceBox<String> action = new ChoiceBox<>();
         action.getItems().addAll("Click", "Type", "Delay");
 
-        scrl.setContent(grid);
-        VBox Menu = new VBox(5);
-
-        splt.getItems().add(scrl);
-        splt.getItems().add(Menu);
-        splt.setDividerPositions(0);
-
-        root.getChildren().add(splt);
-
-
+        /*
         HBox ButtonBox = new HBox(5);
         ButtonBox.getChildren().add(newProfile);
         grid.add(ButtonBox,0,1);
+        */
 
-        return new Scene(root, 800, 600);
+        return scene;
     }
 
 }

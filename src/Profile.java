@@ -46,7 +46,7 @@ public class Profile extends Command{
         fr.close();
     }
 
-    void DeleteProfile(String profileName) throws IOException {
+    static void DeleteProfile(String profileName) throws IOException {
         Scanner match = new Scanner(System.in);
         File profiles = new File("Profiles.txt");
         BufferedReader br = new BufferedReader(new FileReader(profiles));
