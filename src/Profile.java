@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 
-public class Profile extends Command{
+public class Profile{
 
     String profileName;
 

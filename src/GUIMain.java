@@ -28,10 +28,10 @@ public class GUIMain extends javafx.application.Application{
     private Scene GenerateScene() throws IOException {
 
         GridPane grid = new GridPane();
-        grid.setPadding(new Insets(20, 20, 20, 20));
+        grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(8);
         grid.setHgap(10);
-        //grid.setAlignment(Pos.CENTER);
+        grid.setAlignment(Pos.TOP_LEFT);
 
         Label profile = new Label("Profiles");
         GridPane.setConstraints(profile, 0, 0);
@@ -127,11 +127,6 @@ public class GUIMain extends javafx.application.Application{
         ChoiceBox<String> action = new ChoiceBox<>();
         action.getItems().addAll("Click", "Type", "Delay");
 
-        /*
-        HBox ButtonBox = new HBox(5);
-        ButtonBox.getChildren().add(newProfile);
-        grid.add(ButtonBox,0,1);
-        */
         grid.getChildren().addAll(
                 profile, profiles, proceed, newProfile, deleteProfile
         );
