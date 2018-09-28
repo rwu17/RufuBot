@@ -16,9 +16,9 @@ public class Profile extends Command{
 
     public Profile(String profileName) {
         this.profileName = profileName;
-        this.CreateProfileDocument(profileName);
+        //this.CreateProfileDocument(profileName);
     }
-
+/*
     static void CreateProfileDocument(String profileName) {
         try {
             Formatter profile = new Formatter(profileName + ".txt");
@@ -26,6 +26,7 @@ public class Profile extends Command{
             e.printStackTrace();
         }
     }
+*/
 
     void loadProfile(String profileName) {
         while(profile.hasNext()) {
@@ -34,13 +35,15 @@ public class Profile extends Command{
         }
     }
 
-    static void CreateProfile(String profileName, ArrayList<String> Profiles) throws IOException {
+    static void CreateProfile(String profileName, ChoiceBox<String> profile, ArrayList<String> Profiles) throws IOException {
 
         File profiles = new File("Profiles.txt");
         FileWriter fw = new FileWriter(profiles, true);
         BufferedWriter bw = new BufferedWriter(fw);
         Profiles.add(profileName);
         bw.write(profileName + "\n");
+        profile.getItems().add(profileName);
+
 
         bw.close();
         fw.close();
@@ -78,9 +81,12 @@ public class Profile extends Command{
         BufferedReader br = new BufferedReader(new FileReader(profilesList));
         while ((line = br.readLine()) != null) {
             Profiles.add(line);
+            profiles.getItems().add(line);
+            /*
             if (!(profiles.getItems().contains(line))) {
                 profiles.getItems().add(line);
             }
+            */
         }
         br.close();
     }
