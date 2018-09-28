@@ -1,3 +1,6 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -12,6 +15,24 @@ public class Profile extends Command{
 
     private Scanner profile;
 
+    static Formatter CreateProfileList() {
+
+        Formatter profiles_txt;
+
+        Path profiles = Paths.get("Profiles.txt");
+
+        try {
+            profiles_txt = new Formatter("Profiles.txt");
+            profiles_txt.format("Profiles: \n");
+            profiles_txt.close();
+
+        } catch (Exception e) {
+            System.out.println("Error on file creation.");
+        }
+
+        return profiles_txt;
+    }
+
     public Profile(String profileName) {
         this.profileName = profileName;
         this.CreateProfileDocument(profileName);
@@ -25,6 +46,8 @@ public class Profile extends Command{
         }
     }
 
+
+
     void loadProfile(String profileName) {
         while(profile.hasNext()) {
             String line = profile.nextLine();
@@ -32,9 +55,13 @@ public class Profile extends Command{
         }
     }
 
-    void CreateProfile(String profileName) {
+    static void CreateProfile(String profileName) {
+
+        Formatter addProfile = Profile.CreateProfileList();
+
         Profile name = new Profile(profileName);
-        Profiles.add(name);
+
+        addProfile.format();
 
 
     }

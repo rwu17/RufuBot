@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.Formatter;
 import java.util.Optional;
 
 public class GUIMain extends javafx.application.Application{
@@ -44,8 +46,21 @@ public class GUIMain extends javafx.application.Application{
         Button newProfile = new Button("New Profile");
 
         newProfile.setOnAction(event -> {
-            
+            TextInputDialog createProfile = new TextInputDialog("");
+            createProfile.setTitle("RufuBot");
+            createProfile.setHeaderText("Please enter the name for profile");
+            createProfile.setContentText("Profile Name: ");
+
+            Optional<String> nameProfile = createProfile.showAndWait();
+
+            nameProfile.ifPresent(name -> {
+                Formatter addProfile;
+                addProfile = Profile.CreateProfileList();
+
+
+            });
         });
+
 
         Button deleteProfile = new Button("Delete Profile");
 
