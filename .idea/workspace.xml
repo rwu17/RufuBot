@@ -28,12 +28,17 @@
             <entry file="file://$PROJECT_DIR$/src/GUIMain.java">
               <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <state relative-caret-position="856">
                   <caret line="72" column="44" lean-forward="false" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
 =======
                 <state relative-caret-position="153">
                   <caret line="70" column="47" lean-forward="false" selection-start-line="70" selection-start-column="47" selection-end-line="70" selection-end-column="47" />
 >>>>>>> parent of edb1451... Profile Completed (guess)
+=======
+                <state relative-caret-position="856">
+                  <caret line="72" column="44" lean-forward="false" selection-start-line="72" selection-start-column="44" selection-end-line="72" selection-end-column="44" />
+>>>>>>> parent of 1ece2ce... .
                   <folding />
                 </state>
               </provider>
@@ -43,6 +48,9 @@
             <entry file="file://$PROJECT_DIR$/Profiles.txt">
               <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1ece2ce... .
                 <state relative-caret-position="459">
                   <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
                   <folding>
@@ -105,6 +113,7 @@
                     <element signature="e#2475#2476#0" expanded="true" />
                     <element signature="e#2524#2525#0" expanded="true" />
                     <element signature="e#2564#2565#0" expanded="true" />
+<<<<<<< HEAD
 =======
           <file leaf-file-name="Profile.java" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/Profile.java">
@@ -117,11 +126,14 @@
                     <element signature="e#1858#1859#0" expanded="true" />
                     <element signature="e#1898#1899#0" expanded="true" />
 >>>>>>> parent of edb1451... Profile Completed (guess)
+=======
+>>>>>>> parent of 1ece2ce... .
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
           <file leaf-file-name="GUIMain.java" pinned="false" current-in-tab="true">
@@ -135,6 +147,8 @@
             </entry>
           </file>
 >>>>>>> parent of edb1451... Profile Completed (guess)
+=======
+>>>>>>> parent of 1ece2ce... .
         </leaf>
       </split-second>
     </splitter>
@@ -425,18 +439,25 @@
       <workItem from="1538117442990" duration="18997000" />
 <<<<<<< HEAD
       <workItem from="1538147919479" duration="9942000" />
+<<<<<<< HEAD
 =======
       <workItem from="1538147919479" duration="674000" />
 >>>>>>> parent of edb1451... Profile Completed (guess)
+=======
+>>>>>>> parent of 1ece2ce... .
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="55160000" />
 =======
     <option name="totallyTimeSpent" value="45892000" />
 >>>>>>> parent of edb1451... Profile Completed (guess)
+=======
+    <option name="totallyTimeSpent" value="55160000" />
+>>>>>>> parent of 1ece2ce... .
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -675,7 +696,11 @@
     <entry file="file://$PROJECT_DIR$/src/AutoClickerMain.java" />
     <entry file="file://$PROJECT_DIR$/src/Command.java" />
     <entry file="file://$PROJECT_DIR$/src/Typer.java" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/Mover.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/Clicker.java">
+>>>>>>> parent of 1ece2ce... .
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
@@ -683,10 +708,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Clicker.java">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="34">
           <caret line="3" column="13" lean-forward="false" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+=======
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+>>>>>>> parent of 1ece2ce... .
           <folding />
         </state>
       </provider>
@@ -721,12 +751,17 @@
     <entry file="file://$PROJECT_DIR$/src/GUIMain.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <state relative-caret-position="500">
           <caret line="100" column="13" lean-forward="true" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
 =======
         <state relative-caret-position="153">
           <caret line="70" column="47" lean-forward="false" selection-start-line="70" selection-start-column="47" selection-end-line="70" selection-end-column="47" />
 >>>>>>> parent of edb1451... Profile Completed (guess)
+=======
+        <state relative-caret-position="500">
+          <caret line="100" column="13" lean-forward="true" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="13" />
+>>>>>>> parent of 1ece2ce... .
           <folding />
         </state>
       </provider>
@@ -734,6 +769,9 @@
     <entry file="file://$PROJECT_DIR$/src/Profile.java">
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 1ece2ce... .
         <state relative-caret-position="-827">
           <caret line="21" column="11" lean-forward="false" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
           <folding>

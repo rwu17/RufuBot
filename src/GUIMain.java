@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Optional;
 import java.util.Scanner;
@@ -17,14 +18,14 @@ public class GUIMain extends javafx.application.Application{
 
     static Stage PrimaryStage;
 
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) throws IOException {
         PrimaryStage = primaryStage;
         primaryStage.setTitle("RufuBot");
         primaryStage.setScene(GenerateScene());
         primaryStage.show();
     }
 
-    private Scene GenerateScene() {
+    private Scene GenerateScene() throws IOException {
 
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(20, 20, 20, 20));
@@ -35,7 +36,10 @@ public class GUIMain extends javafx.application.Application{
         Label profile = new Label("Profiles");
         GridPane.setConstraints(profile, 0, 0);
 
+        ArrayList<String> Profiles = new ArrayList<>();
+
         ChoiceBox<String> profiles = new ChoiceBox<>();
+        Profile.LoadProfiles(profiles, Profiles);
         GridPane.setConstraints(profiles, 0, 1);
         /*
         profiles.getItems().add();
@@ -58,31 +62,24 @@ public class GUIMain extends javafx.application.Application{
             Optional<String> nameProfile = createProfile.showAndWait();
 
             nameProfile.ifPresent(name -> {
-                try {
-<<<<<<< HEAD
-                    for (String x: Profiles) {
-                        if (x.toLowerCase().equals(name.toLowerCase())){
-                            Alert nameTaken = new Alert(Alert.AlertType.ERROR);
-                            nameTaken.setTitle("RufuBot");
-                            nameTaken.setHeaderText(null);
-                            nameTaken.setContentText("The entered name already exists!");
-                            Optional<ButtonType> confirm = nameTaken.showAndWait();
-                        }
-                        else {
+                for (String x: Profiles) {
+                    if (x.toLowerCase().equals(name.toLowerCase())){
+                        Alert nameTaken = new Alert(Alert.AlertType.ERROR);
+                        nameTaken.setTitle("RufuBot");
+                        nameTaken.setHeaderText(null);
+                        nameTaken.setContentText("The entered name already exists!");
+                        Optional<ButtonType> confirm = nameTaken.showAndWait();
+                    }
+                    else {
+                        try {
                             profiles.getItems().add(name);
                             Profile.CreateProfile(name, Profiles);
-                            //Profile.CreateProfileDocument(name);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
+                        //Profile.CreateProfileDocument(name);
                     }
-=======
-                    Profile.CreateProfile(name);
->>>>>>> parent of edb1451... Profile Completed (guess)
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-
-                profiles.getItems().add(name);
-
             });
         });
         GridPane.setConstraints(newProfile, 1,1);
@@ -95,9 +92,11 @@ public class GUIMain extends javafx.application.Application{
             confirm.setContentText("Sure you want to delete the selected profile?");
             Optional<ButtonType> answer = confirm.showAndWait();
 
+            String selected = profiles.getSelectionModel().getSelectedItem();
+
             if (answer.isPresent() && answer.get() == ButtonType.OK){
                 try {
-                    Profile.DeleteProfile(profiles.getSelectionModel().getSelectedItem());
+                    Profile.DeleteProfile(selected, Profiles, profiles);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
