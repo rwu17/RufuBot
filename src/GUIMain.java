@@ -27,12 +27,10 @@ public class GUIMain extends javafx.application.Application{
     private Scene GenerateScene() {
 
         GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(8);
         grid.setHgap(10);
         //grid.setAlignment(Pos.CENTER);
-
-        Scene scene = new Scene(grid, 800, 600);
 
         Label profile = new Label("Profiles");
         GridPane.setConstraints(profile, 0, 0);
@@ -43,9 +41,12 @@ public class GUIMain extends javafx.application.Application{
         profiles.getItems().add();
         */
         Button proceed = new Button("Proceed");
+        proceed.setOnAction(event -> {
+            //Proceed event
+        });
+        GridPane.setConstraints(proceed, 0,2);
 
         Button newProfile = new Button("New Profile");
-
         newProfile.setOnAction(event -> {
             TextInputDialog createProfile = new TextInputDialog("");
             createProfile.setTitle("RufuBot");
@@ -67,9 +68,9 @@ public class GUIMain extends javafx.application.Application{
 
             });
         });
+        GridPane.setConstraints(newProfile, 1,1);
 
         Button deleteProfile = new Button("Delete Profile");
-
         deleteProfile.setOnAction(event -> {
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("RufuBot");
@@ -86,6 +87,7 @@ public class GUIMain extends javafx.application.Application{
             }
 
         });
+        GridPane.setConstraints(deleteProfile,2,1);
 
         Button editProfile = new Button("Edit Profile");
 
@@ -102,6 +104,10 @@ public class GUIMain extends javafx.application.Application{
 
         Button cancel = new Button("Cancel");
 
+        cancel.setOnAction(event -> {
+
+        });
+
         ChoiceBox<String> action = new ChoiceBox<>();
         action.getItems().addAll("Click", "Type", "Delay");
 
@@ -110,6 +116,10 @@ public class GUIMain extends javafx.application.Application{
         ButtonBox.getChildren().add(newProfile);
         grid.add(ButtonBox,0,1);
         */
+        grid.getChildren().addAll(
+                profile, profiles, proceed, newProfile, deleteProfile
+        );
+        Scene scene = new Scene(grid, 800, 600);
 
         return scene;
     }
