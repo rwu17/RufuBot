@@ -53,29 +53,29 @@ public class GUIMain extends javafx.application.Application{
 
         Button newProfile = new Button("Add");
         newProfile.setOnAction(event -> {
-            TextInputDialog createProfile = new TextInputDialog("Name");
+            TextInputDialog createProfile = new TextInputDialog("");
             createProfile.setTitle("RufuBot");
             createProfile.setHeaderText("Please enter the name for profile");
             Optional<String> nameProfile = createProfile.showAndWait();
 
             nameProfile.ifPresent(name -> {
-                String input = name;
-                for (String x: Profiles) {
-                    if (x.toLowerCase().equals(input.toLowerCase())){
-                        Alert nameTaken = new Alert(Alert.AlertType.ERROR);
-                        nameTaken.setTitle("RufuBot");
-                        nameTaken.setHeaderText(null);
-                        nameTaken.setContentText("The entered name already exists!");
-                        Optional<ButtonType> confirm = nameTaken.showAndWait();
-                    }
-                    else {
-                        try {
-                            Profile.CreateProfile(input, profiles, Profiles);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                try {
+                    for (String x: Profiles) {
+                        if (x.toLowerCase().equals(name.toLowerCase())){
+                            Alert nameTaken = new Alert(Alert.AlertType.ERROR);
+                            nameTaken.setTitle("RufuBot");
+                            nameTaken.setHeaderText(null);
+                            nameTaken.setContentText("The entered name already exists!");
+                            Optional<ButtonType> confirm = nameTaken.showAndWait();
                         }
-                        //Profile.CreateProfileDocument(name);
+                        else {
+                            profiles.getItems().add(name);
+                            Profile.CreateProfile(name, Profiles);
+                            //Profile.CreateProfileDocument(name);
+                        }
                     }
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             });
         });
