@@ -7,8 +7,6 @@ import java.util.Scanner;
 
 public class Typer {
 
-
-
     void proceed() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the text: ");

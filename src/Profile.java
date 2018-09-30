@@ -1,98 +1,132 @@
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
-
-import java.nio.file.Files;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Profile{
 
     String profileName;
 
-    ArrayList<Profile> Profiles = new ArrayList<>();
-
-    ArrayList<Command> Commands = new ArrayList<>();
+    //ArrayList<Command> Commands = new ArrayList<>();
 
     private Scanner profile;
 
+    /*
     public Profile(String profileName) {
         this.profileName = profileName;
         this.CreateProfileDocument(profileName);
     }
+    */
 
-    static void CreateProfileDocument(String profileName) {
+    static void CreateProfileDocument(String profileName){
+        File profileDocument = new File(profileName + ".txt");
         try {
-            Formatter profile = new Formatter(profileName + ".txt");
-        } catch (FileNotFoundException e) {
+            profileDocument.createNewFile();
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    static void LoadProfiles(File profilesList, ArrayList<String> Profiles, ChoiceBox<String> profiles) {
+        try (BufferedReader br = new BufferedReader(new FileReader(profilesList))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                Profiles.add(line);
+                profiles.getItems().add(line);
+            }
+            System.out.print(Profiles);
+            System.out.println("\n---------------------\n");
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void AddProfile(File profilesList, String name, ArrayList<String> Profiles, ChoiceBox<String> profiles){
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("RufuBot");
+        confirm.setHeaderText(null);
+        confirm.setContentText("Are you sure you want the profile name \"" + name + "\"?");
+        Optional<ButtonType> answer = confirm.showAndWait();
+
+        if (answer.isPresent() && answer.get() == ButtonType.OK) {
+            BufferedWriter bw = null;
+            try {
+                bw = new BufferedWriter(new FileWriter(profilesList, true));
+            } catch (IOException e) {
+                System.out.println("bw = new bufferedwriter error");
+                e.printStackTrace();
+            }
+            try {
+                bw.append(name).append("\n");
+            } catch (IOException e) {
+                System.out.println("bw.append error");
+                e.printStackTrace();
+            }
+            Profiles.add(name);
+            profiles.getItems().add(name);
+            //Profile.CreateProfileDocument(name);
+            profiles.getSelectionModel().select(name);
+            System.out.print(Profiles);
+            System.out.println("\n---------------------\n");
+            try {
+                bw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    static void DeleteProfile(File profilesList, ArrayList<String> Profiles, ChoiceBox<String> profiles) {
+        try {
+            String selected = profiles.getSelectionModel().getSelectedItem();
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("RufuBot");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to delete the profile \"" + selected + "\"?");
+            Optional<ButtonType> answer = confirm.showAndWait();
+
+            if (answer.isPresent() && answer.get() == ButtonType.OK) {
+                Profiles.remove(selected);
+                profiles.getItems().remove(selected);
+                File ProfileFile = new File(selected + ".txt");
+                FileOutputStream file = new FileOutputStream(ProfileFile);
+                file.close();
+                ProfileFile.delete();
+
+                BufferedWriter bw = new BufferedWriter(new FileWriter(profilesList));
+                for (String x: Profiles) {
+                    bw.write(x + "\n");
+                }
+                profiles.getSelectionModel().selectFirst();
+                bw.close();
+                System.out.print(Profiles);
+                System.out.println("\n---------------------\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static boolean sameName(String name, ArrayList<String> Profiles) {
+        for (int i = 0; i < Profiles.size(); i++) {
+            if (Profiles.get(i).toLowerCase().equals(name.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     void loadProfile(String profileName) {
         while(profile.hasNext()) {
             String line = profile.nextLine();
-
         }
-    }
-
-    static void CreateProfile(String profileName, ArrayList<String> Profiles) throws IOException {
-
-        File profiles = new File("Profiles.txt");
-        FileWriter fw = new FileWriter(profiles, true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        Profiles.add(profileName);
-        bw.write(profileName + "\n");
-
-        bw.close();
-        fw.close();
-
-    }
-
-
-    static void DeleteProfile(String profileName, ArrayList<String> Profiles, ChoiceBox<String> profilesList) throws IOException {
-
-        Profiles.remove(profileName);
-        profilesList.getItems().remove(profileName);
-
-        /*
-        File file = new File(profileName + ".txt");
-
-        if (file.delete()) {
-            System.out.println(file.getName() + " is deleted.");
-        } else {
-            System.out.println("Operation failed");
-        }
-        */
-
-        File profiles = new File("Profiles.txt");
-        FileWriter fw = new FileWriter(profiles, false);
-        BufferedWriter bw = new BufferedWriter(fw);
-
-        for (String x: Profiles) {
-            bw.write(x + "\n");
-        }
-
-        bw.close();
-        fw.close();
-    }
-
-    static void LoadProfiles(ChoiceBox<String> profiles, ArrayList<String> Profiles) throws IOException {
-        Scanner line = new Scanner(System.in);
-        File profilesList = new File("Profiles.txt");
-        BufferedReader br = new BufferedReader(new FileReader(profilesList));
-        while (line.hasNext()) {
-            Profiles.add(line.nextLine());
-            if (!(profiles.getItems().contains(line))) {
-                profiles.getItems().add(line.nextLine());
-            }
-        }
-
-        br.close();
     }
 }
