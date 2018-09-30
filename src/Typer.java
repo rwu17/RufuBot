@@ -1,20 +1,21 @@
 import java.awt.Robot;
 import java.awt.AWTException;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.security.Key;
 import java.util.Scanner;
 
 public class Typer {
 
-    void proceed() {
+    static void proceed(File profile, String text, int delay) {
+        /*
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the text: ");
         String string = scanner.nextLine();
-
         System.out.println("Enter delay between typing in millisecond: ");
         int delay = scanner.nextInt();
-
+        */
         Robot rb = null;
         try {
             rb = new Robot();
@@ -31,12 +32,12 @@ public class Typer {
             e.printStackTrace();
         }
         */
-
         rb.delay(3000); //Start in 3 seconds
 
-        char ch[] = string.toCharArray();
+        char ch[] = text.toCharArray();
 
-        for (int i = 0; i < ch.length; i++) {
+        int i = 0;
+        while (i < ch.length) {
 
             if (ch[i] == ' ') {
                 rb.keyPress(KeyEvent.VK_SPACE);
@@ -589,10 +590,11 @@ public class Typer {
                 rb.delay(delay);
             }
             */
+            i++;
         }
 
         rb.delay(3000);
-
+        /*
         rb.keyPress(KeyEvent.VK_ALT);
         rb.keyPress(KeyEvent.VK_F4);
 
@@ -603,6 +605,6 @@ public class Typer {
         rb.keyRelease(KeyEvent.VK_RIGHT);
         rb.keyPress(KeyEvent.VK_ENTER);
         rb.keyRelease(KeyEvent.VK_ENTER);
-
+        */
     }
 }

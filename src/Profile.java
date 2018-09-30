@@ -115,6 +115,14 @@ public class Profile{
         }
     }
 
+    static void None(){
+        Alert none = new Alert(Alert.AlertType.ERROR);
+        none.setTitle("RufuBot");
+        none.setHeaderText(null);
+        none.setContentText("Please select a profile!");
+        Optional<ButtonType> ok = none.showAndWait();
+    }
+
     static boolean sameName(String name, ArrayList<String> Profiles) {
         for (int i = 0; i < Profiles.size(); i++) {
             if (Profiles.get(i).toLowerCase().equals(name.toLowerCase())) {

@@ -4,6 +4,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -15,12 +18,40 @@ import java.util.Scanner;
 public class GUI extends javafx.application.Application{
 
     static Stage PrimaryStage;
+    static boolean answer;
 
     public void start(Stage primaryStage) throws IOException {
         PrimaryStage = primaryStage;
         primaryStage.setTitle("RufuBot");
         primaryStage.setScene(GenerateScene());
+        primaryStage.setOnCloseRequest(event -> {
+                event.consume();
+                closeProgram();
+        });
         primaryStage.show();
+    }
+
+    private void closeProgram() {
+        Boolean answer = GUI.display("Rufubot", "Sure you want to exit?");
+        if (answer) {
+            PrimaryStage.close();
+        }
+    }
+
+    public static boolean display(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(message);
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.NO);
+        alert.getButtonTypes().setAll(yes, no);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == yes) {
+            answer = true;
+        } else if (result.get() == no) {
+            answer = false;
+        }
+        return answer;
     }
 
     private Scene GenerateScene() throws IOException {
@@ -37,6 +68,7 @@ public class GUI extends javafx.application.Application{
 
         Label profile = new Label("Profiles");
         GridPane.setConstraints(profile, 0, 0);
+        grid.add(profile,0,0);
 
         ArrayList<String> Profiles = new ArrayList<>();
         ChoiceBox<String> profiles = new ChoiceBox<>();
@@ -46,13 +78,14 @@ public class GUI extends javafx.application.Application{
         if (Profiles.size() > 0) {
             profiles.getSelectionModel().selectFirst();
         }
-        GridPane.setConstraints(profiles, 0, 1);
 
         Button proceed = new Button("Proceed");
         proceed.setOnAction(event -> {
             //Proceed event
+            if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
+                Profile.None();
+            }
         });
-        GridPane.setConstraints(proceed, 0,2);
 
         Button newProfile = new Button("Add");
         newProfile.setOnAction(event -> {
@@ -101,20 +134,19 @@ public class GUI extends javafx.application.Application{
         Button deleteProfile = new Button("Delete");
         deleteProfile.setOnAction(event -> {
             if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
-                Alert none = new Alert(Alert.AlertType.ERROR);
-                none.setTitle("RufuBot");
-                none.setHeaderText(null);
-                none.setContentText("Please select a profile!");
-                Optional<ButtonType> ok = none.showAndWait();
+                Profile.None();
             } else {
                 Profile.DeleteProfile(profilesList, Profiles, profiles);
             }
         });
         GridPane.setConstraints(deleteProfile,2,1);
 
-        Button editProfile = new Button("Edit");
+        Button editProfile = new Button("Edit Profile");
         editProfile.setOnAction(event -> {
             //Edit profile
+            if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
+                Profile.None();
+            }
         });
         GridPane.setConstraints(editProfile, 1,2);
 
@@ -139,9 +171,19 @@ public class GUI extends javafx.application.Application{
         ChoiceBox<String> action = new ChoiceBox<>();
         action.getItems().addAll("Click", "Type", "Delay");
 
-        grid.getChildren().addAll(
-                profile, profiles, proceed, newProfile, deleteProfile, editProfile
-        );
+        HBox Inputs = new HBox(5);
+        Inputs.getChildren().add(profiles);
+        Inputs.getChildren().add(newProfile);
+        Inputs.getChildren().add(deleteProfile);
+        grid.add(Inputs,0,1);
+
+        HBox EditProfile = new HBox(5);
+        EditProfile.getChildren().add(proceed);
+        EditProfile.getChildren().add(editProfile);
+        grid.add(EditProfile,0,2);
+
+
+
         Scene scene = new Scene(grid, 800, 600);
 
         return scene;
