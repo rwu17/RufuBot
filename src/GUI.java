@@ -71,7 +71,7 @@ public class GUI extends javafx.application.Application{
         grid.add(profile,0,0);
 
         ArrayList<String> Profiles = new ArrayList<>();
-        ChoiceBox<String> profiles = new ChoiceBox<>();
+        ComboBox<String> profiles = new ComboBox();
 
         Profile.LoadProfiles(profilesList, Profiles, profiles);
 

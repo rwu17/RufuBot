@@ -1,6 +1,7 @@
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 
 import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
@@ -34,7 +35,7 @@ public class Profile{
         }
     }
 
-    static void LoadProfiles(File profilesList, ArrayList<String> Profiles, ChoiceBox<String> profiles) {
+    static void LoadProfiles(File profilesList, ArrayList<String> Profiles, ComboBox<String> profiles) {
         try (BufferedReader br = new BufferedReader(new FileReader(profilesList))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -49,7 +50,7 @@ public class Profile{
         }
     }
 
-    static void AddProfile(File profilesList, String name, ArrayList<String> Profiles, ChoiceBox<String> profiles){
+    static void AddProfile(File profilesList, String name, ArrayList<String> Profiles, ComboBox<String> profiles){
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
         confirm.setTitle("RufuBot");
         confirm.setHeaderText(null);
@@ -84,7 +85,7 @@ public class Profile{
         }
     }
 
-    static void DeleteProfile(File profilesList, ArrayList<String> Profiles, ChoiceBox<String> profiles) {
+    static void DeleteProfile(File profilesList, ArrayList<String> Profiles, ComboBox<String> profiles) {
         try {
             String selected = profiles.getSelectionModel().getSelectedItem();
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
