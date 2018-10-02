@@ -2,6 +2,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.HBox;
@@ -17,8 +18,8 @@ import java.util.Scanner;
 
 public class GUI extends javafx.application.Application{
 
-    static Stage PrimaryStage;
-    static boolean answer;
+    private static Stage PrimaryStage;
+    private static boolean answer;
 
     public void start(Stage primaryStage) throws IOException {
         PrimaryStage = primaryStage;
@@ -38,7 +39,7 @@ public class GUI extends javafx.application.Application{
         }
     }
 
-    public static boolean display(String title, String message) {
+    private static boolean display(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(message);
@@ -59,7 +60,7 @@ public class GUI extends javafx.application.Application{
         File profilesList = new File("Profiles.txt");
         profilesList.createNewFile();
         //FileOutputStream ofile = new FileOutputStream(profilesList, true);
-
+        
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(8);
