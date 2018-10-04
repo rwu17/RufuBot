@@ -12,6 +12,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -82,7 +83,12 @@ public class GUI extends javafx.application.Application{
 
         ArrayList<String> Profiles = new ArrayList<>();
         ComboBox<String> profiles = new ComboBox();
+
         ArrayList<String> Commands = new ArrayList<>();
+        ChoiceBox<String> ActionType = new ChoiceBox<>();
+        ActionType.setDisable(true);
+        Label type = new Label("Action Type");
+
 
         Profile.LoadProfiles(profilesList, Profiles, profiles);
 
@@ -156,9 +162,12 @@ public class GUI extends javafx.application.Application{
         Button removeCommand = new Button("Remove Action");
         Button apply = new Button("Apply");
 
+
+
         addCommand.setDisable(true);
         addCommand.setOnAction(event -> {
             //Add action
+            ActionType.setDisable(false);
         });
 
         removeCommand.setDisable(true);
@@ -254,9 +263,40 @@ public class GUI extends javafx.application.Application{
         border.setLeft(leftSide);
         //-------------------------------------------Left Part of the screen ---------------------------
 
-        ChoiceBox<String> ActionType = new ChoiceBox<>();
         ActionType.getItems().addAll("Mouse Click", "Type Key", "Delay");
-        
+
+        String selectedItem = ActionType.getSelectionModel().getSelectedItem();
+
+        /*
+        switch (selectedItem) {
+            case "Mouse Click" : {
+                ChoiceBox<String> MouseAction = new ChoiceBox<>();
+                ActionType.getItems().addAll("Left Click", "Right Click", "Middle Click");
+
+                TextField clickTime = new TextField();
+                break;
+            }
+
+            case "Type Key" : {
+
+                break;
+            }
+
+            case "Delay" : {
+
+                break;
+            }
+
+        }
+        */
+
+        VBox rightSide = new VBox(5);
+        rightSide.setPadding(new Insets(20, 12, 15, 12));
+        rightSide.setSpacing(10);
+        rightSide.getChildren().addAll(type, ActionType);
+
+        border.setCenter(rightSide);
+
 
         Scene scene = new Scene(border, 800, 600);
 
