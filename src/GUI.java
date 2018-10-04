@@ -60,19 +60,8 @@ public class GUI extends javafx.application.Application{
         File profilesList = new File("Profiles.txt");
         profilesList.createNewFile();
         //FileOutputStream ofile = new FileOutputStream(profilesList, true);
-<<<<<<< HEAD
 
         BorderPane border = new BorderPane();
-        /*
-=======
-        
->>>>>>> bd2086f34210daf7df0cbb0fa54aff50a79d3740
-        GridPane grid = new GridPane();
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        grid.setVgap(8);
-        grid.setHgap(10);
-        grid.setAlignment(Pos.TOP_LEFT);
-        */
 
         Label profile = new Label("Profiles");
 
