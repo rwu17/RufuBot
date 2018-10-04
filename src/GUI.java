@@ -252,6 +252,11 @@ public class GUI extends javafx.application.Application{
         leftSide.getChildren().addAll(borderLeft, separator);
 
         border.setLeft(leftSide);
+        //-------------------------------------------Left Part of the screen ---------------------------
+
+        ChoiceBox<String> ActionType = new ChoiceBox<>();
+        ActionType.getItems().addAll("Mouse Click", "Type Key", "Delay");
+        
 
         Scene scene = new Scene(border, 800, 600);
 
