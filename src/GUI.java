@@ -209,7 +209,6 @@ public class GUI extends javafx.application.Application{
             if (Profiles.isEmpty()) {
                 Profile.None();
             } else {
-                ActionType.setDisable(false);
                 editProfile.setDisable(true);
                 table.setEditable(true);
                 addCommand.setDisable(false);
@@ -235,7 +234,6 @@ public class GUI extends javafx.application.Application{
 
         VBox top = new VBox(5);
         top.setPadding(new Insets(15,12,5,12));
-        top.setSpacing(10);
         top.getChildren().add(profile);
         top.getChildren().add(Inputs);
         top.getChildren().add(EditProfile);
@@ -249,13 +247,11 @@ public class GUI extends javafx.application.Application{
 
         HBox Actions = new HBox(5);
         Actions.setPadding(new Insets(5,12,15,12));
-        Actions.setSpacing(10);
         Actions.getChildren().add(tableName);
         Actions.getChildren().add(editCommand);
 
         VBox borderLeft = new VBox(5);
         borderLeft.setPadding(new Insets(5,12,15,12));
-        borderLeft.setSpacing(10);
         borderLeft.getChildren().addAll(top, Actions);
 
         HBox leftSide = new HBox();
@@ -265,7 +261,6 @@ public class GUI extends javafx.application.Application{
         //-------------------------------------------Left Part of the screen ---------------------------
         VBox rightSide = new VBox(5);
         rightSide.setPadding(new Insets(20, 12, 15, 12));
-        rightSide.setSpacing(10);
         rightSide.getChildren().addAll(type, ActionType);
         border.setCenter(rightSide);
 
@@ -279,12 +274,10 @@ public class GUI extends javafx.application.Application{
 
         VBox mouseMenu = new VBox(5);
         mouseMenu.setPadding(new Insets(10,12,15,0));
-        mouseMenu.setSpacing(10);
         mouseMenu.getChildren().addAll(MouseButton, mouseButton);
 
         VBox keyboardMenu = new VBox(5);
         keyboardMenu.setPadding(new Insets(10,12,15,0));
-        keyboardMenu.setSpacing(10);
 
 
 
