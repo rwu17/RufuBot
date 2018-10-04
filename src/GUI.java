@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -66,6 +67,7 @@ public class GUI extends javafx.application.Application{
         Label profile = new Label("Profiles");
 
         Label actionList = new Label("Action list");
+        actionList.setFont(new Font("Segoe UI", 20));
 
         TableView table = new TableView();
 
@@ -74,6 +76,7 @@ public class GUI extends javafx.application.Application{
 
         table.getColumns().addAll(actionType, actionInput);
 
+        table.setDisable(true);
         table.setEditable(false);
 
         ArrayList<String> Profiles = new ArrayList<>();
@@ -189,10 +192,9 @@ public class GUI extends javafx.application.Application{
 
         editProfile.setOnAction(event -> {
             //Edit profile
-            if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
+            if (Profiles.isEmpty()) {
                 Profile.None();
             } else {
-
                 editProfile.setDisable(true);
                 table.setEditable(true);
                 addCommand.setDisable(false);
@@ -218,24 +220,31 @@ public class GUI extends javafx.application.Application{
         //grid.add(EditProfile,0,2);
 
         VBox top = new VBox(5);
-        top.setPadding(new Insets(15,12,15,12));
+        top.setPadding(new Insets(15,12,5,12));
         top.setSpacing(10);
         top.getChildren().add(profile);
         top.getChildren().add(Inputs);
         top.getChildren().add(EditProfile);
 
-        border.setTop(top);
-
-        VBox editCommand = new VBox(5);
+        VBox editCommand = new VBox(10);
+        editCommand.setPadding(new Insets(33,0,0,0));
         editCommand.getChildren().addAll(addCommand, removeCommand, apply,cancel);
 
+        VBox tableName = new VBox(10);
+        tableName.getChildren().addAll(actionList, table);
+
         HBox Actions = new HBox(5);
-        Actions.setPadding(new Insets(15,12,15,12));
+        Actions.setPadding(new Insets(5,12,15,12));
         Actions.setSpacing(10);
-        Actions.getChildren().add(table);
+        Actions.getChildren().add(tableName);
         Actions.getChildren().add(editCommand);
 
-        border.setLeft(Actions);
+        VBox borderLeft = new VBox(5);
+        borderLeft.setPadding(new Insets(5,12,15,12));
+        borderLeft.setSpacing(10);
+        borderLeft.getChildren().addAll(top, Actions);
+
+        border.setLeft(borderLeft);
 
         Scene scene = new Scene(border, 800, 600);
 
