@@ -16,7 +16,7 @@ public class Profile{
 
     String profileName;
 
-    //ArrayList<Command> Commands = new ArrayList<>();
+    ArrayList<String> Commands = new ArrayList<>();
 
     private Scanner profile;
 

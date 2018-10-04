@@ -267,28 +267,26 @@ public class GUI extends javafx.application.Application{
 
         String selectedItem = ActionType.getSelectionModel().getSelectedItem();
 
-        /*
+
         switch (selectedItem) {
-            case "Mouse Click" : {
+            case "Mouse Click" :
                 ChoiceBox<String> MouseAction = new ChoiceBox<>();
                 ActionType.getItems().addAll("Left Click", "Right Click", "Middle Click");
 
                 TextField clickTime = new TextField();
                 break;
-            }
 
-            case "Type Key" : {
-
-                break;
-            }
-
-            case "Delay" : {
+            case "Type Key" :
 
                 break;
-            }
 
+            case "Delay" :
+
+                break;
+
+            default:
+                break;
         }
-        */
 
         VBox rightSide = new VBox(5);
         rightSide.setPadding(new Insets(20, 12, 15, 12));
