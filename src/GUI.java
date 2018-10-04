@@ -1,4 +1,5 @@
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -208,6 +209,9 @@ public class GUI extends javafx.application.Application{
         ChoiceBox<String> action = new ChoiceBox<>();
         action.getItems().addAll("Click", "Type", "Delay");
 
+        Separator separator = new Separator();
+        separator.setOrientation(Orientation.VERTICAL);
+
         HBox Inputs = new HBox(10);
         Inputs.getChildren().add(profiles);
         Inputs.getChildren().add(newProfile);
@@ -244,7 +248,10 @@ public class GUI extends javafx.application.Application{
         borderLeft.setSpacing(10);
         borderLeft.getChildren().addAll(top, Actions);
 
-        border.setLeft(borderLeft);
+        HBox leftSide = new HBox();
+        leftSide.getChildren().addAll(borderLeft, separator);
+
+        border.setLeft(leftSide);
 
         Scene scene = new Scene(border, 800, 600);
 
