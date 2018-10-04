@@ -20,13 +20,6 @@ public class Profile{
 
     private Scanner profile;
 
-    /*
-    public Profile(String profileName) {
-        this.profileName = profileName;
-        this.CreateProfileDocument(profileName);
-    }
-    */
-
     static void CreateProfileDocument(String profileName){
         File profileDocument = new File(profileName + ".txt");
         try {

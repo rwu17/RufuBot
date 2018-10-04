@@ -148,21 +148,11 @@ public class GUI extends javafx.application.Application{
         });
 
         Button deleteProfile = new Button("Delete");
-        deleteProfile.setOnAction(event -> {
-            if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
-                Profile.None();
-            } else {
-                Profile.DeleteProfile(profilesList, Profiles, profiles);
-            }
-        });
-
         Button editProfile = new Button("Edit Profile");
         Button cancel = new Button("Cancel");
         Button addCommand = new Button("Add Action");
         Button removeCommand = new Button("Remove Action");
         Button apply = new Button("Apply");
-
-
 
         addCommand.setDisable(true);
         addCommand.setOnAction(event -> {
@@ -183,7 +173,7 @@ public class GUI extends javafx.application.Application{
             confirm.setHeaderText(null);
             confirm.setContentText("Are you sure you want to apply the current settings?\n The original settings will be overwritten.");
             Optional<ButtonType> answer = confirm.showAndWait();
-
+            ActionType.setDisable(true);
             editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
         });
 
@@ -195,9 +185,23 @@ public class GUI extends javafx.application.Application{
             confirm.setHeaderText(null);
             confirm.setContentText("Are you sure you want to cancel the current settings?\nThe changes will not be saved.");
             Optional<ButtonType> answer = confirm.showAndWait();
-
+            ActionType.setDisable(true);
             editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
 
+        });
+
+        deleteProfile.setOnAction(event -> {
+            if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
+                Profile.None();
+            } else {
+                ActionType.setDisable(true);
+                cancel.setDisable(true);
+                apply.setDisable(true);
+                editProfile.setDisable(false);
+                addCommand.setDisable(true);
+                removeCommand.setDisable(true);
+                Profile.DeleteProfile(profilesList, Profiles, profiles);
+            }
         });
 
         editProfile.setOnAction(event -> {
@@ -205,6 +209,7 @@ public class GUI extends javafx.application.Application{
             if (Profiles.isEmpty()) {
                 Profile.None();
             } else {
+                ActionType.setDisable(false);
                 editProfile.setDisable(true);
                 table.setEditable(true);
                 addCommand.setDisable(false);
@@ -213,10 +218,6 @@ public class GUI extends javafx.application.Application{
                 cancel.setDisable(false);
             }
         });
-        GridPane.setConstraints(editProfile, 1,2);
-
-        ChoiceBox<String> action = new ChoiceBox<>();
-        action.getItems().addAll("Click", "Type", "Delay");
 
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
@@ -262,42 +263,52 @@ public class GUI extends javafx.application.Application{
 
         border.setLeft(leftSide);
         //-------------------------------------------Left Part of the screen ---------------------------
-
-        ActionType.getItems().addAll("Mouse Click", "Type Key", "Delay");
-
-        String selectedItem = ActionType.getSelectionModel().getSelectedItem();
-
-
-        switch (selectedItem) {
-            case "Mouse Click" :
-                ChoiceBox<String> MouseAction = new ChoiceBox<>();
-                ActionType.getItems().addAll("Left Click", "Right Click", "Middle Click");
-
-                TextField clickTime = new TextField();
-                break;
-
-            case "Type Key" :
-
-                break;
-
-            case "Delay" :
-
-                break;
-
-            default:
-                break;
-        }
-
         VBox rightSide = new VBox(5);
         rightSide.setPadding(new Insets(20, 12, 15, 12));
         rightSide.setSpacing(10);
         rightSide.getChildren().addAll(type, ActionType);
-
         border.setCenter(rightSide);
 
+        Label MouseButton = new Label("Mouse Button");
+        ChoiceBox<String> mouseButton = new ChoiceBox<>();
+        mouseButton.getItems().addAll("Left Click", "Right Click", "Middle Click");
+
+        Label ClickTime = new Label("Time(s)");
+        TextField TimeClick = new TextField();
+        TimeClick.setPromptText("Enter amount of times");
+
+        VBox mouseMenu = new VBox(5);
+        mouseMenu.setPadding(new Insets(10,12,15,0));
+        mouseMenu.setSpacing(10);
+        mouseMenu.getChildren().addAll(MouseButton, mouseButton);
+
+        VBox keyboardMenu = new VBox(5);
+        keyboardMenu.setPadding(new Insets(10,12,15,0));
+        keyboardMenu.setSpacing(10);
+
+
+
+        ActionType.getItems().addAll("Mouse Click", "Keyboard", "Delay");
+        ActionType.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+            switch (newValue) {
+                case "Mouse Click":
+                    rightSide.getChildren().addAll(mouseMenu);
+
+                    break;
+                case "Keyboard":
+                    rightSide.getChildren().removeAll(mouseMenu);
+
+                    break;
+                case "Delay":
+                    rightSide.getChildren().removeAll(mouseMenu);
+
+                    break;
+                default:
+                    break;
+            }
+        });
 
         Scene scene = new Scene(border, 800, 600);
-
         return scene;
     }
 
@@ -310,5 +321,4 @@ public class GUI extends javafx.application.Application{
             removeCommand.setDisable(true);
         }
     }
-
 }
