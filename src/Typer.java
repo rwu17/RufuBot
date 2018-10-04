@@ -32,7 +32,7 @@ public class Typer {
             e.printStackTrace();
         }
         */
-        rb.delay(3000); //Start in 3 seconds
+        //rb.delay(3000); Start in 3 seconds
 
         char ch[] = text.toCharArray();
 
@@ -593,7 +593,6 @@ public class Typer {
             i++;
         }
 
-        rb.delay(3000);
         /*
         rb.keyPress(KeyEvent.VK_ALT);
         rb.keyPress(KeyEvent.VK_F4);

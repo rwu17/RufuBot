@@ -2,6 +2,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import javafx.scene.layout.HBox;
@@ -17,8 +18,8 @@ import java.util.Scanner;
 
 public class GUI extends javafx.application.Application{
 
-    static Stage PrimaryStage;
-    static boolean answer;
+    private static Stage PrimaryStage;
+    private static boolean answer;
 
     public void start(Stage primaryStage) throws IOException {
         PrimaryStage = primaryStage;
@@ -38,7 +39,7 @@ public class GUI extends javafx.application.Application{
         }
     }
 
-    public static boolean display(String title, String message) {
+    private static boolean display(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(message);
@@ -59,19 +60,36 @@ public class GUI extends javafx.application.Application{
         File profilesList = new File("Profiles.txt");
         profilesList.createNewFile();
         //FileOutputStream ofile = new FileOutputStream(profilesList, true);
+<<<<<<< HEAD
 
+        BorderPane border = new BorderPane();
+        /*
+=======
+        
+>>>>>>> bd2086f34210daf7df0cbb0fa54aff50a79d3740
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(10, 10, 10, 10));
         grid.setVgap(8);
         grid.setHgap(10);
         grid.setAlignment(Pos.TOP_LEFT);
+        */
 
         Label profile = new Label("Profiles");
-        GridPane.setConstraints(profile, 0, 0);
-        grid.add(profile,0,0);
+
+        Label actionList = new Label("Action list");
+
+        TableView table = new TableView();
+
+        TableColumn actionType = new TableColumn("Action Type");
+        TableColumn actionInput = new TableColumn("Input");
+
+        table.getColumns().addAll(actionType, actionInput);
+
+        table.setEditable(false);
 
         ArrayList<String> Profiles = new ArrayList<>();
         ComboBox<String> profiles = new ComboBox();
+        ArrayList<String> Commands = new ArrayList<>();
 
         Profile.LoadProfiles(profilesList, Profiles, profiles);
 
@@ -129,7 +147,6 @@ public class GUI extends javafx.application.Application{
                 }
             });
         });
-        GridPane.setConstraints(newProfile, 1,1);
 
         Button deleteProfile = new Button("Delete");
         deleteProfile.setOnAction(event -> {
@@ -139,53 +156,111 @@ public class GUI extends javafx.application.Application{
                 Profile.DeleteProfile(profilesList, Profiles, profiles);
             }
         });
-        GridPane.setConstraints(deleteProfile,2,1);
 
         Button editProfile = new Button("Edit Profile");
+        Button cancel = new Button("Cancel");
+        Button addCommand = new Button("Add Action");
+        Button removeCommand = new Button("Remove Action");
+        Button apply = new Button("Apply");
+
+        addCommand.setDisable(true);
+        addCommand.setOnAction(event -> {
+            //Add action
+        });
+
+        removeCommand.setDisable(true);
+        removeCommand.setOnAction(event -> {
+            //Remove action
+        });
+
+        apply.setDisable(true);
+        apply.setOnAction(event -> {
+            //Apply setting
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("RufuBot");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to apply the current settings?\n The original settings will be overwritten.");
+            Optional<ButtonType> answer = confirm.showAndWait();
+
+            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
+        });
+
+        cancel.setDisable(true);
+        cancel.setOnAction(event -> {
+            //Cancel setting
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("RufuBot");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to cancel the current settings?\nThe changes will not be saved.");
+            Optional<ButtonType> answer = confirm.showAndWait();
+
+            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
+
+        });
+
         editProfile.setOnAction(event -> {
             //Edit profile
             if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
                 Profile.None();
+            } else {
+
+                editProfile.setDisable(true);
+                table.setEditable(true);
+                addCommand.setDisable(false);
+                removeCommand.setDisable(false);
+                apply.setDisable(false);
+                cancel.setDisable(false);
             }
         });
         GridPane.setConstraints(editProfile, 1,2);
 
-        Button apply = new Button("Apply");
-        apply.setOnAction(event -> {
-            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-            confirm.setTitle("RufuBot");
-            confirm.setHeaderText(null);
-            confirm.setContentText("Are you sure you want to apply the current settings?");
-            Optional<ButtonType> answer = confirm.showAndWait();
-
-            if (answer.isPresent() && answer.get() == ButtonType.OK){
-                //Apply setting
-            }
-        });
-
-        Button cancel = new Button("Cancel");
-        cancel.setOnAction(event -> {
-            //Cancel setting
-        });
-
         ChoiceBox<String> action = new ChoiceBox<>();
         action.getItems().addAll("Click", "Type", "Delay");
 
-        HBox Inputs = new HBox(5);
+        HBox Inputs = new HBox(10);
         Inputs.getChildren().add(profiles);
         Inputs.getChildren().add(newProfile);
         Inputs.getChildren().add(deleteProfile);
-        grid.add(Inputs,0,1);
+        //grid.add(Inputs,0,1);
 
-        HBox EditProfile = new HBox(5);
+        HBox EditProfile = new HBox(10);
         EditProfile.getChildren().add(proceed);
         EditProfile.getChildren().add(editProfile);
-        grid.add(EditProfile,0,2);
+        //grid.add(EditProfile,0,2);
 
+        VBox top = new VBox(5);
+        top.setPadding(new Insets(15,12,15,12));
+        top.setSpacing(10);
+        top.getChildren().add(profile);
+        top.getChildren().add(Inputs);
+        top.getChildren().add(EditProfile);
 
+        border.setTop(top);
 
-        Scene scene = new Scene(grid, 800, 600);
+        VBox editCommand = new VBox(5);
+        editCommand.getChildren().addAll(addCommand, removeCommand, apply,cancel);
+
+        HBox Actions = new HBox(5);
+        Actions.setPadding(new Insets(15,12,15,12));
+        Actions.setSpacing(10);
+        Actions.getChildren().add(table);
+        Actions.getChildren().add(editCommand);
+
+        border.setLeft(Actions);
+
+        Scene scene = new Scene(border, 800, 600);
 
         return scene;
     }
+
+    private void editProfileButtons(Button editProfile, Button cancel, Button addCommand, Button removeCommand, Button apply, Optional<ButtonType> answer) {
+        if (answer.isPresent() && answer.get() == ButtonType.OK){
+            cancel.setDisable(true);
+            apply.setDisable(true);
+            editProfile.setDisable(false);
+            addCommand.setDisable(true);
+            removeCommand.setDisable(true);
+        }
+    }
+
 }

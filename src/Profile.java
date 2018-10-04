@@ -3,6 +3,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 
+import java.awt.*;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.io.*;
 
