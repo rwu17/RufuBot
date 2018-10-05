@@ -3,7 +3,7 @@ import java.awt.event.InputEvent;
 
 public class Click {
 
-    static void proceed(String button, int delay){
+    static void proceed(String button, int delay/*ms*/){
 
         Robot robot = null;
 
@@ -15,9 +15,6 @@ public class Click {
 
         //robot.delay(3000); //Start in 3 seconds
 
-        Click clicker = new Click();
-        clicker.setDelay(delay);
-
         switch (button) {
             case "Left Click":
                 try {
@@ -28,7 +25,6 @@ public class Click {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 break;
             case "Right Click":
                 try {

@@ -12,12 +12,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.sql.Time;
 import java.util.ArrayList;
 
 import java.util.Optional;
@@ -292,13 +294,51 @@ public class GUI extends javafx.application.Application{
         ChoiceBox<String> mouseButton = new ChoiceBox<>();
         mouseButton.getItems().addAll("Left Click", "Right Click", "Middle Click");
 
-        Label ClickTime = new Label("Time(s)");
+        Label ClickTime = new Label("Repeat Time");
         TextField TimeClick = new TextField();
-        TimeClick.setPromptText("Enter amount of times");
+        TimeClick.setPromptText("Enter amount of time");
+        TimeClick.setMaxWidth(125);
 
-        VBox mouseMenu = new VBox(5);
+        Label mousePositionLabel = new Label("Clicking Position");
+        mousePositionLabel.setFont(new Font("Segoe UI", 20.5));
+        Button mousePosition = new Button("Set Position");
+
+        Label x = new Label("X:");
+        x.setFont(new Font("Segoe UI", 20));
+        TextField xPos = new TextField();
+        xPos.setPromptText("X-Coordinate");
+        xPos.setMaxWidth(80);
+
+        Label y = new Label("Y:");
+        y.setFont(new Font("Segoe UI", 20));
+        TextField yPos = new TextField();
+        yPos.setPromptText("Y-Coordinate");
+        yPos.setMaxWidth(80);
+
+        VBox mouseButtonSet = new VBox(5);
+        mouseButtonSet.getChildren().addAll(MouseButton, mouseButton);
+
+        VBox clickTimeSet = new VBox(5);
+        clickTimeSet.getChildren().addAll(ClickTime, TimeClick);
+
+        HBox mouseSetting = new HBox(10);
+        mouseSetting.getChildren().addAll(mouseButtonSet, clickTimeSet);
+
+        HBox getPosition = new HBox(5);
+        getPosition.getChildren().addAll(mousePositionLabel, mousePosition);
+
+        HBox xPosition = new HBox(5);
+        xPosition.getChildren().addAll(x, xPos);
+
+        HBox yPosition = new HBox(5);
+        yPosition.getChildren().addAll(y, yPos);
+
+        VBox Positions = new VBox(10);
+        Positions.getChildren().addAll(getPosition, xPosition, yPosition);
+
+        VBox mouseMenu = new VBox(10);
         mouseMenu.setPadding(new Insets(10,12,15,0));
-        mouseMenu.getChildren().addAll(MouseButton, mouseButton);
+        mouseMenu.getChildren().addAll(mouseSetting, Positions);
 
         VBox keyboardMenu = new VBox(5);
         keyboardMenu.setPadding(new Insets(10,12,15,0));
