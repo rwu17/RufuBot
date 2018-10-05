@@ -3,15 +3,10 @@ import java.awt.event.InputEvent;
 
 public class Click {
 
-    private Robot robot;
-    private int delay;
+    static void proceed(String button, int delay){
 
-    void proceed(int delay){
-        /*
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Delay between clicks (ms): ");
-        int delay = scanner.nextInt();
-        */
+        Robot robot = null;
+
         try {
             robot = new Robot();
         } catch (AWTException e) {
@@ -23,7 +18,41 @@ public class Click {
         Click clicker = new Click();
         clicker.setDelay(delay);
 
-        clicker.clickMouse(InputEvent.BUTTON1_DOWN_MASK);
+        switch (button) {
+            case "Left Click":
+                try {
+                    robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+                    robot.delay(delay);
+                    robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+                    robot.delay(delay);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            case "Right Click":
+                try {
+                    robot.mousePress(InputEvent.BUTTON2_DOWN_MASK);
+                    robot.delay(delay);
+                    robot.mouseRelease(InputEvent.BUTTON2_DOWN_MASK);
+                    robot.delay(delay);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "Middle Click":
+                try {
+                    robot.mousePress(InputEvent.BUTTON3_DOWN_MASK);
+                    robot.delay(delay);
+                    robot.mouseRelease(InputEvent.BUTTON3_DOWN_MASK);
+                    robot.delay(delay);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                break;
+        }
     }
     /*
         public Clicker() {
@@ -35,7 +64,12 @@ public class Click {
             delay = 300;
         }
     */
-    void MoveMouse(Double xCoord, Double yCoord) {
+
+    static void MousePosition() {
+
+    }
+
+    static void MoveMouse(Double xCoord, Double yCoord) {
 
         int x = (int) Math.round(xCoord);
         int y = (int) Math.round(yCoord);
@@ -49,18 +83,9 @@ public class Click {
         }
     }
 
-    public void clickMouse(int button) {
-        try {
-            robot.mousePress(button);
-            robot.delay(delay);
-            robot.mouseRelease(button);
-            robot.delay(delay);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    /*
     public void setDelay(int ms) {
         this.delay = ms;
     }
+    */
 }

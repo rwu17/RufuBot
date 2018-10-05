@@ -3,6 +3,9 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -13,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -77,9 +81,7 @@ public class GUI extends javafx.application.Application{
         TableColumn actionInput = new TableColumn("Input");
 
         table.getColumns().addAll(actionType, actionInput);
-
         table.setDisable(true);
-        table.setEditable(false);
 
         ArrayList<String> Profiles = new ArrayList<>();
         ComboBox<String> profiles = new ComboBox();
@@ -154,70 +156,6 @@ public class GUI extends javafx.application.Application{
         Button removeCommand = new Button("Remove Action");
         Button apply = new Button("Apply");
 
-        addCommand.setDisable(true);
-        addCommand.setOnAction(event -> {
-            //Add action
-            ActionType.setDisable(false);
-        });
-
-        removeCommand.setDisable(true);
-        removeCommand.setOnAction(event -> {
-            //Remove action
-        });
-
-        apply.setDisable(true);
-        apply.setOnAction(event -> {
-            //Apply setting
-            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-            confirm.setTitle("RufuBot");
-            confirm.setHeaderText(null);
-            confirm.setContentText("Are you sure you want to apply the current settings?\n The original settings will be overwritten.");
-            Optional<ButtonType> answer = confirm.showAndWait();
-            ActionType.setDisable(true);
-            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
-        });
-
-        cancel.setDisable(true);
-        cancel.setOnAction(event -> {
-            //Cancel setting
-            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-            confirm.setTitle("RufuBot");
-            confirm.setHeaderText(null);
-            confirm.setContentText("Are you sure you want to cancel the current settings?\nThe changes will not be saved.");
-            Optional<ButtonType> answer = confirm.showAndWait();
-            ActionType.setDisable(true);
-            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
-
-        });
-
-        deleteProfile.setOnAction(event -> {
-            if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
-                Profile.None();
-            } else {
-                ActionType.setDisable(true);
-                cancel.setDisable(true);
-                apply.setDisable(true);
-                editProfile.setDisable(false);
-                addCommand.setDisable(true);
-                removeCommand.setDisable(true);
-                Profile.DeleteProfile(profilesList, Profiles, profiles);
-            }
-        });
-
-        editProfile.setOnAction(event -> {
-            //Edit profile
-            if (Profiles.isEmpty()) {
-                Profile.None();
-            } else {
-                editProfile.setDisable(true);
-                table.setEditable(true);
-                addCommand.setDisable(false);
-                removeCommand.setDisable(false);
-                apply.setDisable(false);
-                cancel.setDisable(false);
-            }
-        });
-
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
 
@@ -225,12 +163,9 @@ public class GUI extends javafx.application.Application{
         Inputs.getChildren().add(profiles);
         Inputs.getChildren().add(newProfile);
         Inputs.getChildren().add(deleteProfile);
-        //grid.add(Inputs,0,1);
 
         HBox EditProfile = new HBox(10);
-        EditProfile.getChildren().add(proceed);
-        EditProfile.getChildren().add(editProfile);
-        //grid.add(EditProfile,0,2);
+        EditProfile.getChildren().addAll(proceed,editProfile);
 
         VBox top = new VBox(5);
         top.setPadding(new Insets(15,12,5,12));
@@ -256,6 +191,95 @@ public class GUI extends javafx.application.Application{
 
         HBox leftSide = new HBox();
         leftSide.getChildren().addAll(borderLeft, separator);
+
+        addCommand.setDisable(true);
+        addCommand.setOnAction(event -> {
+            //Add action
+            ActionType.setDisable(false);
+        });
+
+        removeCommand.setDisable(true);
+        removeCommand.setOnAction(event -> {
+            //Remove action
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("RufuBot");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to remove the selected action?\n You cannot undo once the action is removed.");
+            Optional<ButtonType> answer = confirm.showAndWait();
+
+            if (answer.isPresent() && answer.get() == ButtonType.OK){
+            }
+
+        });
+
+        apply.setDisable(true);
+        apply.setOnAction(event -> {
+            //Apply setting
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("RufuBot");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to apply the current settings?\n The original settings will be overwritten.");
+            Optional<ButtonType> answer = confirm.showAndWait();
+            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
+            ActionType.setDisable(true);
+            table.setDisable(true);
+            profiles.setDisable(false);
+            proceed.setDisable(false);
+            newProfile.setDisable(false);
+            deleteProfile.setDisable(false);
+            editProfile.setDisable(false);
+        });
+
+        cancel.setDisable(true);
+        cancel.setOnAction(event -> {
+            //Cancel setting
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("RufuBot");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to cancel the current settings?\nThe changes will not be saved.");
+            Optional<ButtonType> answer = confirm.showAndWait();
+            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
+            ActionType.setDisable(true);
+            table.setDisable(true);
+            profiles.setDisable(false);
+            proceed.setDisable(false);
+            newProfile.setDisable(false);
+            deleteProfile.setDisable(false);
+            editProfile.setDisable(false);
+
+        });
+
+        deleteProfile.setOnAction(event -> {
+            if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
+                Profile.None();
+            } else {
+                Profile.DeleteProfile(profilesList, Profiles, profiles);
+                editProfile.setDisable(false);
+                addCommand.setDisable(true);
+                removeCommand.setDisable(true);
+                apply.setDisable(true);
+                cancel.setDisable(true);
+                ActionType.setDisable(true);
+            }
+        });
+
+        editProfile.setOnAction(event -> {
+            //Edit profile
+            if (Profiles.isEmpty()) {
+                Profile.None();
+            } else {
+                profiles.setDisable(true);
+                proceed.setDisable(true);
+                newProfile.setDisable(true);
+                deleteProfile.setDisable(true);
+                editProfile.setDisable(true);
+                table.setDisable(false);
+                addCommand.setDisable(false);
+                removeCommand.setDisable(false);
+                apply.setDisable(false);
+                cancel.setDisable(false);
+            }
+        });
 
         border.setLeft(leftSide);
         //-------------------------------------------Left Part of the screen ---------------------------
