@@ -87,12 +87,25 @@ public class GUI extends javafx.application.Application{
 
         ArrayList<String> Profiles = new ArrayList<>();
         ComboBox<String> profiles = new ComboBox();
+        profiles.setMaxWidth(120);
+        profiles.setMinWidth(120);
 
         ArrayList<String> Commands = new ArrayList<>();
         ChoiceBox<String> ActionType = new ChoiceBox<>();
         ActionType.setDisable(true);
         Label type = new Label("Action Type");
 
+        Button proceed = new Button("Proceed");
+        Button newProfile = new Button("Add");
+        Button deleteProfile = new Button("Delete");
+        Button editProfile = new Button("Edit Profile");
+        Button cancel = new Button("Cancel");
+        Button addCommand = new Button("Add Action");
+        Button removeCommand = new Button("Remove Action");
+        Button apply = new Button("Apply");
+
+        Separator separator = new Separator();
+        separator.setOrientation(Orientation.VERTICAL);
 
         Profile.LoadProfiles(profilesList, Profiles, profiles);
 
@@ -100,7 +113,6 @@ public class GUI extends javafx.application.Application{
             profiles.getSelectionModel().selectFirst();
         }
 
-        Button proceed = new Button("Proceed");
         proceed.setOnAction(event -> {
             //Proceed event
             if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
@@ -108,7 +120,6 @@ public class GUI extends javafx.application.Application{
             }
         });
 
-        Button newProfile = new Button("Add");
         newProfile.setOnAction(event -> {
             TextInputDialog createProfile = new TextInputDialog("Profile Name");
             createProfile.setTitle("RufuBot");
@@ -150,16 +161,7 @@ public class GUI extends javafx.application.Application{
                 }
             });
         });
-
-        Button deleteProfile = new Button("Delete");
-        Button editProfile = new Button("Edit Profile");
-        Button cancel = new Button("Cancel");
-        Button addCommand = new Button("Add Action");
-        Button removeCommand = new Button("Remove Action");
-        Button apply = new Button("Apply");
-
-        Separator separator = new Separator();
-        separator.setOrientation(Orientation.VERTICAL);
+        newProfile.setMinWidth(50);
 
         HBox Inputs = new HBox(10);
         Inputs.getChildren().add(profiles);
@@ -167,6 +169,8 @@ public class GUI extends javafx.application.Application{
         Inputs.getChildren().add(deleteProfile);
 
         HBox EditProfile = new HBox(10);
+        editProfile.setMinWidth(110);
+        proceed.setMinWidth(120);
         EditProfile.getChildren().addAll(proceed,editProfile);
 
         VBox top = new VBox(5);
@@ -182,13 +186,13 @@ public class GUI extends javafx.application.Application{
         VBox tableName = new VBox(10);
         tableName.getChildren().addAll(actionList, table);
 
-        HBox Actions = new HBox(5);
-        Actions.setPadding(new Insets(5,12,15,12));
+        HBox Actions = new HBox(15);
+        Actions.setPadding(new Insets(5,5,15,12));
         Actions.getChildren().add(tableName);
         Actions.getChildren().add(editCommand);
 
         VBox borderLeft = new VBox(5);
-        borderLeft.setPadding(new Insets(5,12,15,12));
+        borderLeft.setPadding(new Insets(5,5,15,12));
         borderLeft.getChildren().addAll(top, Actions);
 
         HBox leftSide = new HBox();
@@ -199,6 +203,7 @@ public class GUI extends javafx.application.Application{
             //Add action
             ActionType.setDisable(false);
         });
+        addCommand.setMinWidth(120);
 
         removeCommand.setDisable(true);
         removeCommand.setOnAction(event -> {
@@ -213,6 +218,7 @@ public class GUI extends javafx.application.Application{
             }
 
         });
+        removeCommand.setMinWidth(120);
 
         apply.setDisable(true);
         apply.setOnAction(event -> {
@@ -231,6 +237,7 @@ public class GUI extends javafx.application.Application{
             deleteProfile.setDisable(false);
             editProfile.setDisable(false);
         });
+        apply.setMinWidth(120);
 
         cancel.setDisable(true);
         cancel.setOnAction(event -> {
@@ -248,8 +255,8 @@ public class GUI extends javafx.application.Application{
             newProfile.setDisable(false);
             deleteProfile.setDisable(false);
             editProfile.setDisable(false);
-
         });
+        cancel.setMinWidth(120);
 
         deleteProfile.setOnAction(event -> {
             if (Profiles.isEmpty()) { //profiles.getSelectionModel().getSelectedItem().equals(" ")
@@ -264,6 +271,7 @@ public class GUI extends javafx.application.Application{
                 ActionType.setDisable(true);
             }
         });
+        deleteProfile.setMinWidth(50);
 
         editProfile.setOnAction(event -> {
             //Edit profile
@@ -296,24 +304,27 @@ public class GUI extends javafx.application.Application{
 
         Label ClickTime = new Label("Repeat Time");
         TextField TimeClick = new TextField();
-        TimeClick.setPromptText("Enter amount of time");
-        TimeClick.setMaxWidth(125);
+        TimeClick.setMinWidth(70);
+        TimeClick.setMaxWidth(70);
+
+        Label ClickDelay = new Label("Click Delay");
+        TextField clickDelay = new TextField();
+        clickDelay.setMinWidth(70);
+        clickDelay.setMaxWidth(70);
 
         Label mousePositionLabel = new Label("Clicking Position");
-        mousePositionLabel.setFont(new Font("Segoe UI", 20.5));
         Button mousePosition = new Button("Set Position");
+        mousePosition.setMinWidth(149);
 
         Label x = new Label("X:");
-        x.setFont(new Font("Segoe UI", 20));
         TextField xPos = new TextField();
         xPos.setPromptText("X-Coordinate");
-        xPos.setMaxWidth(80);
+        xPos.setMinWidth(243);
 
         Label y = new Label("Y:");
-        y.setFont(new Font("Segoe UI", 20));
         TextField yPos = new TextField();
         yPos.setPromptText("Y-Coordinate");
-        yPos.setMaxWidth(80);
+        yPos.setMinWidth(243);
 
         VBox mouseButtonSet = new VBox(5);
         mouseButtonSet.getChildren().addAll(MouseButton, mouseButton);
@@ -321,44 +332,59 @@ public class GUI extends javafx.application.Application{
         VBox clickTimeSet = new VBox(5);
         clickTimeSet.getChildren().addAll(ClickTime, TimeClick);
 
-        HBox mouseSetting = new HBox(10);
-        mouseSetting.getChildren().addAll(mouseButtonSet, clickTimeSet);
+        VBox clickTimeSet2 = new VBox(5);
+        clickTimeSet2.getChildren().addAll(ClickDelay, clickDelay);
 
-        HBox getPosition = new HBox(5);
+        HBox mouseSetting = new HBox(10);
+        mouseSetting.getChildren().addAll(mouseButtonSet, clickTimeSet, clickTimeSet2);
+
+        HBox getPosition = new HBox(21);
         getPosition.getChildren().addAll(mousePositionLabel, mousePosition);
+        getPosition.setAlignment(Pos.CENTER_LEFT);
 
         HBox xPosition = new HBox(5);
         xPosition.getChildren().addAll(x, xPos);
+        xPosition.setAlignment(Pos.CENTER_LEFT);
 
         HBox yPosition = new HBox(5);
         yPosition.getChildren().addAll(y, yPos);
+        yPosition.setAlignment(Pos.CENTER_LEFT);
 
         VBox Positions = new VBox(10);
         Positions.getChildren().addAll(getPosition, xPosition, yPosition);
 
-        VBox mouseMenu = new VBox(10);
+        VBox mouseMenu = new VBox(15);
         mouseMenu.setPadding(new Insets(10,12,15,0));
         mouseMenu.getChildren().addAll(mouseSetting, Positions);
 
+        //----------------------Mouse Menu----------------------------------------------
+        Label keyboardInput = new Label("Text Input");
+        TextField textInput = new TextField();
+
+
+
         VBox keyboardMenu = new VBox(5);
         keyboardMenu.setPadding(new Insets(10,12,15,0));
-
-
+        //----------------------Keyboard Menu-------------------------------------------
+        VBox delayMenu = new VBox(5);
+        delayMenu.setPadding(new Insets(10,12,15,0));
 
         ActionType.getItems().addAll("Mouse Click", "Keyboard", "Delay");
         ActionType.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
             switch (newValue) {
                 case "Mouse Click":
+                    rightSide.getChildren().removeAll(keyboardMenu, delayMenu);
                     rightSide.getChildren().addAll(mouseMenu);
 
                     break;
                 case "Keyboard":
-                    rightSide.getChildren().removeAll(mouseMenu);
+                    rightSide.getChildren().removeAll(mouseMenu, delayMenu);
+                    rightSide.getChildren().addAll(keyboardMenu);
 
                     break;
                 case "Delay":
-                    rightSide.getChildren().removeAll(mouseMenu);
-
+                    rightSide.getChildren().removeAll(mouseMenu, keyboardMenu);
+                    rightSide.getChildren().addAll(delayMenu);
                     break;
                 default:
                     break;
