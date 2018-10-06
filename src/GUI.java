@@ -1,6 +1,7 @@
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -304,11 +305,13 @@ public class GUI extends javafx.application.Application{
 
         Label ClickTime = new Label("Repeat Time");
         TextField TimeClick = new TextField();
+        TimeClick.setText("1");
         TimeClick.setMinWidth(70);
         TimeClick.setMaxWidth(70);
 
         Label ClickDelay = new Label("Click Delay");
         TextField clickDelay = new TextField();
+        clickDelay.setPromptText("Seconds");
         clickDelay.setMinWidth(70);
         clickDelay.setMaxWidth(70);
 
@@ -361,11 +364,18 @@ public class GUI extends javafx.application.Application{
         Label keyboardInput = new Label("Text Input");
         TextField textInput = new TextField();
 
+        Checkbox holdKey = new Checkbox("Key Hold");
 
 
         VBox keyboardMenu = new VBox(5);
         keyboardMenu.setPadding(new Insets(10,12,15,0));
+        keyboardMenu.getChildren().addAll(keyboardInput, textInput);
+
         //----------------------Keyboard Menu-------------------------------------------
+        Label delayLabel = new Label("Delay Time");
+        TextField delayInput = new TextField();
+        
+
         VBox delayMenu = new VBox(5);
         delayMenu.setPadding(new Insets(10,12,15,0));
 
