@@ -93,6 +93,8 @@ public class GUI extends javafx.application.Application{
 
         ArrayList<String> Commands = new ArrayList<>();
         ChoiceBox<String> ActionType = new ChoiceBox<>();
+        ActionType.setMinWidth(98.5);
+        ActionType.setMaxWidth(98.5);
         ActionType.setDisable(true);
         Label type = new Label("Action Type");
 
@@ -104,6 +106,16 @@ public class GUI extends javafx.application.Application{
         Button addCommand = new Button("Add Action");
         Button removeCommand = new Button("Remove Action");
         Button apply = new Button("Apply");
+
+        Button createAction = new Button("Create Action");
+        createAction.setMaxWidth(90);
+        createAction.setMinWidth(90);
+        createAction.setDisable(true);
+
+        Button cancelAction = new Button("Cancel");
+        cancelAction.setMaxWidth(90);
+        cancelAction.setMinWidth(90);
+        cancelAction.setDisable(true);
 
         Separator separator = new Separator();
         separator.setOrientation(Orientation.VERTICAL);
@@ -133,7 +145,7 @@ public class GUI extends javafx.application.Application{
                     Alert noName = new Alert(Alert.AlertType.ERROR);
                     noName.setTitle("RufuBot");
                     noName.setHeaderText(null);
-                    noName.setContentText("Please enter your profile name:");
+                    noName.setContentText("Please enter your profile name!");
                     Optional<ButtonType> ok = noName.showAndWait();
                 } /*else if (Profiles.isEmpty()){
                     Profile.AddProfile(profilesList, name, Profiles, profiles);
@@ -203,6 +215,13 @@ public class GUI extends javafx.application.Application{
         addCommand.setOnAction(event -> {
             //Add action
             ActionType.setDisable(false);
+            createAction.setDisable(false);
+            cancelAction.setDisable(false);
+
+            addCommand.setDisable(true);
+            removeCommand.setDisable(true);
+            apply.setDisable(true);
+            cancel.setDisable(true);
         });
         addCommand.setMinWidth(120);
 
@@ -227,7 +246,7 @@ public class GUI extends javafx.application.Application{
             Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
             confirm.setTitle("RufuBot");
             confirm.setHeaderText(null);
-            confirm.setContentText("Are you sure you want to apply the current settings?\n The original settings will be overwritten.");
+            confirm.setContentText("Are you sure you want to apply the changes?\nThis will be overwrite the original settings.");
             Optional<ButtonType> answer = confirm.showAndWait();
             editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
             ActionType.setDisable(true);
@@ -293,11 +312,22 @@ public class GUI extends javafx.application.Application{
         });
 
         border.setLeft(leftSide);
-        //-------------------------------------------Left Part of the screen ---------------------------
+        //-------------------------------------------Left Part of the screen----------------------------
+        HBox saveSettings = new HBox(5);
+        saveSettings.getChildren().addAll(createAction, cancelAction);
+
+        HBox actionSettings = new HBox(60);
+        actionSettings.getChildren().addAll(ActionType, saveSettings);
+
+        VBox actionTypes = new VBox(5);
+        actionTypes.getChildren().addAll(type, actionSettings);
+
         VBox rightSide = new VBox(5);
-        rightSide.setPadding(new Insets(20, 12, 15, 12));
-        rightSide.getChildren().addAll(type, ActionType);
+        rightSide.setPadding(new Insets(20, 5, 15, 12));
+        rightSide.getChildren().addAll(actionTypes);
         border.setCenter(rightSide);
+
+        //------------------------------------------Right Part of the screen----------------------------
 
         Label MouseButton = new Label("Mouse Button");
         ChoiceBox<String> mouseButton = new ChoiceBox<>();
@@ -364,7 +394,18 @@ public class GUI extends javafx.application.Application{
         Label keyboardInput = new Label("Text Input");
         TextField textInput = new TextField();
 
+        Label TypeDelay = new Label("Type Delay");
+        TextField typeDelay = new TextField();
+        clickDelay.setPromptText("Seconds");
+        clickDelay.setMinWidth(70);
+        clickDelay.setMaxWidth(70);
+
+        VBox typeDelaySet = new VBox(5);
+        typeDelaySet.getChildren().addAll(TypeDelay, typeDelay);
+
+
         Checkbox holdKey = new Checkbox("Key Hold");
+
 
 
         VBox keyboardMenu = new VBox(5);
@@ -374,10 +415,48 @@ public class GUI extends javafx.application.Application{
         //----------------------Keyboard Menu-------------------------------------------
         Label delayLabel = new Label("Delay Time");
         TextField delayInput = new TextField();
-        
+        delayInput.setPromptText("Enter amount of seconds");
 
         VBox delayMenu = new VBox(5);
         delayMenu.setPadding(new Insets(10,12,15,0));
+        delayMenu.getChildren().addAll(delayLabel, delayInput);
+
+        //----------------------Delay Menu-----------------------------------------------
+
+        createAction.setOnAction(event -> {
+            if (ActionType.getSelectionModel().isEmpty()) {
+                Alert none = new Alert(Alert.AlertType.ERROR);
+                none.setTitle("RufuBot");
+                none.setHeaderText(null);
+                none.setContentText("Please select a action type!");
+                Optional<ButtonType> ok = none.showAndWait();
+
+            } else {
+                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                confirm.setTitle("RufuBot");
+                confirm.setHeaderText(null);
+                confirm.setContentText("Are you sure you want to create this action?");
+                Optional<ButtonType> answer = confirm.showAndWait();
+
+                if (answer.isPresent() && answer.get() == ButtonType.OK){
+                    creatActionButtons(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
+                    rightSide.getChildren().removeAll(mouseMenu, keyboardMenu, delayMenu);
+                }
+            }
+        });
+
+        cancelAction.setOnAction(event -> {
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("RufuBot");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to cancel the action creation?");
+            Optional<ButtonType> answer = confirm.showAndWait();
+
+            if (answer.isPresent() && answer.get() == ButtonType.OK){
+                creatActionButtons(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
+                rightSide.getChildren().removeAll(mouseMenu, keyboardMenu, delayMenu);
+            }
+        });
 
         ActionType.getItems().addAll("Mouse Click", "Keyboard", "Delay");
         ActionType.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
@@ -405,13 +484,24 @@ public class GUI extends javafx.application.Application{
         return scene;
     }
 
+    private void creatActionButtons(ChoiceBox<String> actionType, Button cancel, Button addCommand, Button removeCommand, Button apply, Button createAction, Button cancelAction, Optional<ButtonType> answer) {
+        if (answer.isPresent() && answer.get() == ButtonType.OK) {
+            createAction.setDisable(true);
+            cancelAction.setDisable(true);
+            actionType.setDisable(true);
+
+            addCommand.setDisable(false);
+            removeCommand.setDisable(false);
+            apply.setDisable(false);
+            cancel.setDisable(false);
+        }
+    }
+
     private void editProfileButtons(Button editProfile, Button cancel, Button addCommand, Button removeCommand, Button apply, Optional<ButtonType> answer) {
-        if (answer.isPresent() && answer.get() == ButtonType.OK){
             cancel.setDisable(true);
             apply.setDisable(true);
             editProfile.setDisable(false);
             addCommand.setDisable(true);
             removeCommand.setDisable(true);
-        }
     }
 }

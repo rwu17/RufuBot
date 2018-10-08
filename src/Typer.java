@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Typer {
 
-    static void proceed(File profile, String text, int delay) {
+    static void proceed(String text, int delay) {
         /*
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the text: ");
@@ -605,5 +605,9 @@ public class Typer {
         rb.keyPress(KeyEvent.VK_ENTER);
         rb.keyRelease(KeyEvent.VK_ENTER);
         */
+    }
+
+    static void writeInProfile() {
+
     }
 }
