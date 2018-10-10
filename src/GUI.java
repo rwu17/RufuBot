@@ -1,3 +1,5 @@
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -248,14 +250,10 @@ public class GUI extends javafx.application.Application{
             confirm.setHeaderText(null);
             confirm.setContentText("Are you sure you want to apply the changes?\nThis will be overwrite the original settings.");
             Optional<ButtonType> answer = confirm.showAndWait();
-            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
-            ActionType.setDisable(true);
-            table.setDisable(true);
-            profiles.setDisable(false);
-            proceed.setDisable(false);
-            newProfile.setDisable(false);
-            deleteProfile.setDisable(false);
-            editProfile.setDisable(false);
+
+            if (answer.isPresent() && answer.get() == ButtonType.OK) {
+                backToProfiles(table, profiles, ActionType, proceed, newProfile, deleteProfile, editProfile, cancel, addCommand, removeCommand, apply, answer);
+            }
         });
         apply.setMinWidth(120);
 
@@ -267,14 +265,10 @@ public class GUI extends javafx.application.Application{
             confirm.setHeaderText(null);
             confirm.setContentText("Are you sure you want to cancel the current settings?\nThe changes will not be saved.");
             Optional<ButtonType> answer = confirm.showAndWait();
-            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
-            ActionType.setDisable(true);
-            table.setDisable(true);
-            profiles.setDisable(false);
-            proceed.setDisable(false);
-            newProfile.setDisable(false);
-            deleteProfile.setDisable(false);
-            editProfile.setDisable(false);
+
+            if (answer.isPresent() && answer.get() == ButtonType.OK) {
+                backToProfiles(table, profiles, ActionType, proceed, newProfile, deleteProfile, editProfile, cancel, addCommand, removeCommand, apply, answer);
+            }
         });
         cancel.setMinWidth(120);
 
@@ -339,25 +333,70 @@ public class GUI extends javafx.application.Application{
         TimeClick.setMinWidth(70);
         TimeClick.setMaxWidth(70);
 
+        TimeClick.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    TimeClick.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
+
         Label ClickDelay = new Label("Click Delay");
         TextField clickDelay = new TextField();
         clickDelay.setPromptText("Seconds");
         clickDelay.setMinWidth(70);
         clickDelay.setMaxWidth(70);
 
+        clickDelay.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    clickDelay.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+
         Label mousePositionLabel = new Label("Clicking Position");
         Button mousePosition = new Button("Set Position");
         mousePosition.setMinWidth(149);
+        mousePosition.setOnAction(event -> {
+            JFrame frame = new JFrame("TitleLessJFrame");
+            frame.getContentPane().add(new JLabel(" HEY!!!"));
+            frame.setUndecorated(true);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setSize(400, 200);
+            frame.setVisible(true);
+        });
+
 
         Label x = new Label("X:");
         TextField xPos = new TextField();
         xPos.setPromptText("X-Coordinate");
         xPos.setMinWidth(243);
+        xPos.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    xPos.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
 
         Label y = new Label("Y:");
         TextField yPos = new TextField();
         yPos.setPromptText("Y-Coordinate");
         yPos.setMinWidth(243);
+
+        yPos.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    yPos.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
 
         VBox mouseButtonSet = new VBox(5);
         mouseButtonSet.getChildren().addAll(MouseButton, mouseButton);
@@ -416,6 +455,14 @@ public class GUI extends javafx.application.Application{
         Label delayLabel = new Label("Delay Time");
         TextField delayInput = new TextField();
         delayInput.setPromptText("Enter amount of seconds");
+        delayInput.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    delayInput.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
 
         VBox delayMenu = new VBox(5);
         delayMenu.setPadding(new Insets(10,12,15,0));
@@ -439,7 +486,7 @@ public class GUI extends javafx.application.Application{
                 Optional<ButtonType> answer = confirm.showAndWait();
 
                 if (answer.isPresent() && answer.get() == ButtonType.OK){
-                    creatActionButtons(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
+                    createActionButtons(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
                     rightSide.getChildren().removeAll(mouseMenu, keyboardMenu, delayMenu);
                 }
             }
@@ -453,7 +500,7 @@ public class GUI extends javafx.application.Application{
             Optional<ButtonType> answer = confirm.showAndWait();
 
             if (answer.isPresent() && answer.get() == ButtonType.OK){
-                creatActionButtons(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
+                createActionButtons(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
                 rightSide.getChildren().removeAll(mouseMenu, keyboardMenu, delayMenu);
             }
         });
@@ -484,8 +531,18 @@ public class GUI extends javafx.application.Application{
         return scene;
     }
 
-    private void creatActionButtons(ChoiceBox<String> actionType, Button cancel, Button addCommand, Button removeCommand, Button apply, Button createAction, Button cancelAction, Optional<ButtonType> answer) {
-        if (answer.isPresent() && answer.get() == ButtonType.OK) {
+    private void backToProfiles(TableView table, ComboBox<String> profiles, ChoiceBox<String> actionType, Button proceed, Button newProfile, Button deleteProfile, Button editProfile, Button cancel, Button addCommand, Button removeCommand, Button apply, Optional<ButtonType> answer) {
+            editProfileButtons(editProfile, cancel, addCommand, removeCommand, apply, answer);
+            actionType.setDisable(true);
+            table.setDisable(true);
+            profiles.setDisable(false);
+            proceed.setDisable(false);
+            newProfile.setDisable(false);
+            deleteProfile.setDisable(false);
+            editProfile.setDisable(false);
+    }
+
+    private void createActionButtons(ChoiceBox<String> actionType, Button cancel, Button addCommand, Button removeCommand, Button apply, Button createAction, Button cancelAction, Optional<ButtonType> answer) {
             createAction.setDisable(true);
             cancelAction.setDisable(true);
             actionType.setDisable(true);
@@ -494,7 +551,6 @@ public class GUI extends javafx.application.Application{
             removeCommand.setDisable(false);
             apply.setDisable(false);
             cancel.setDisable(false);
-        }
     }
 
     private void editProfileButtons(Button editProfile, Button cancel, Button addCommand, Button removeCommand, Button apply, Optional<ButtonType> answer) {
