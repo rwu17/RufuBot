@@ -362,12 +362,20 @@ public class GUI extends javafx.application.Application{
         Button mousePosition = new Button("Set Position");
         mousePosition.setMinWidth(149);
         mousePosition.setOnAction(event -> {
-            JFrame frame = new JFrame("TitleLessJFrame");
-            frame.getContentPane().add(new JLabel(" HEY!!!"));
+
+            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            int width = gd.getDisplayMode().getWidth();
+            int height = gd.getDisplayMode().getHeight();
+
+            Label mouseCapture = new Label("Click anywhere on the screen to set the position of the mouse click");
+
+            JFrame frame = new JFrame();
+            frame.getContentPane().add(new JLabel("Mouse Position Capture"));
             frame.setUndecorated(true);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(400, 200);
+            frame.setSize(width, height);
             frame.setVisible(true);
+            frame.setOpacity(0.45F);
         });
 
 
