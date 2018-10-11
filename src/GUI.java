@@ -21,6 +21,10 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -361,23 +365,6 @@ public class GUI extends javafx.application.Application{
         Label mousePositionLabel = new Label("Clicking Position");
         Button mousePosition = new Button("Set Position");
         mousePosition.setMinWidth(149);
-        mousePosition.setOnAction(event -> {
-
-            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-            int width = gd.getDisplayMode().getWidth();
-            int height = gd.getDisplayMode().getHeight();
-
-            Label mouseCapture = new Label("Click anywhere on the screen to set the position of the mouse click");
-
-            JFrame frame = new JFrame();
-            frame.getContentPane().add(new JLabel("Mouse Position Capture"));
-            frame.setUndecorated(true);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(width, height);
-            frame.setVisible(true);
-            frame.setOpacity(0.45F);
-        });
-
 
         Label x = new Label("X:");
         TextField xPos = new TextField();
@@ -404,6 +391,50 @@ public class GUI extends javafx.application.Application{
                     yPos.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
+        });
+
+
+        mousePosition.setOnAction(event -> {
+
+            GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+            int width = gd.getDisplayMode().getWidth();
+            int height = gd.getDisplayMode().getHeight();
+
+            JFrame frame = new JFrame();
+            frame.getContentPane().add(new JLabel("Click anywhere on the screen to set the position of the mouse click", JLabel.CENTER));
+            frame.setUndecorated(true);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.setSize(width, height);
+            frame.setVisible(true);
+            frame.setOpacity(0.45F);
+            frame.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    xPos.setText(String.valueOf(e.getX()));
+                    yPos.setText(String.valueOf(e.getY()));
+                    frame.dispose();
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
         });
 
         VBox mouseButtonSet = new VBox(5);

@@ -1,7 +1,10 @@
 import java.awt.*;
 import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class Click {
+public class Click{
 
     static void proceed(String button, int delay/*ms*/){
 
