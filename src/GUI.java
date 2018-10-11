@@ -399,12 +399,13 @@ public class GUI extends javafx.application.Application{
             GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
             int width = gd.getDisplayMode().getWidth();
             int height = gd.getDisplayMode().getHeight();
+            System.out.println(width + " x " + height);
 
             JFrame frame = new JFrame();
             frame.getContentPane().add(new JLabel("Click anywhere on the screen to set the position of the mouse click", JLabel.CENTER));
             frame.setUndecorated(true);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setSize(width, height);
+            frame.setSize(width * 2, height);
             frame.setVisible(true);
             frame.setOpacity(0.45F);
             frame.addMouseListener(new MouseListener() {
