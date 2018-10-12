@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -218,32 +219,9 @@ public class GUI extends javafx.application.Application{
         leftSide.getChildren().addAll(borderLeft, separator);
 
         addCommand.setDisable(true);
-        addCommand.setOnAction(event -> {
-            //Add action
-            ActionType.setDisable(false);
-            createAction.setDisable(false);
-            cancelAction.setDisable(false);
-
-            addCommand.setDisable(true);
-            removeCommand.setDisable(true);
-            apply.setDisable(true);
-            cancel.setDisable(true);
-        });
         addCommand.setMinWidth(120);
 
         removeCommand.setDisable(true);
-        removeCommand.setOnAction(event -> {
-            //Remove action
-            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-            confirm.setTitle("RufuBot");
-            confirm.setHeaderText(null);
-            confirm.setContentText("Are you sure you want to remove the selected action?\n You cannot undo once the action is removed.");
-            Optional<ButtonType> answer = confirm.showAndWait();
-
-            if (answer.isPresent() && answer.get() == ButtonType.OK){
-            }
-
-        });
         removeCommand.setMinWidth(120);
 
         apply.setDisable(true);
@@ -340,8 +318,9 @@ public class GUI extends javafx.application.Application{
         TimeClick.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    TimeClick.setText(newValue.replaceAll("[^\\d]", ""));
+                if (!newValue.matches("\\d{0,4}")) {
+                    TimeClick.setText(oldValue);
+                    //TimeClick.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -356,8 +335,9 @@ public class GUI extends javafx.application.Application{
         clickDelay.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    clickDelay.setText(newValue.replaceAll("[^\\d]", ""));
+                if (!newValue.matches("\\d{0,1}([\\.]\\d{0,2})?")) {
+                    clickDelay.setText(oldValue);
+                    //clickDelay.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -373,8 +353,9 @@ public class GUI extends javafx.application.Application{
         xPos.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    xPos.setText(newValue.replaceAll("[^\\d]", ""));
+                if (!newValue.matches("\\d{0,4}")) {
+                    xPos.setText(oldValue);
+                    //xPos.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -387,18 +368,32 @@ public class GUI extends javafx.application.Application{
         yPos.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    yPos.setText(newValue.replaceAll("[^\\d]", ""));
+                if (!newValue.matches("\\d{0,4}")) {
+                    yPos.setText(oldValue);
+                    //yPos.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
 
 
         mousePosition.setOnAction(event -> {
-
+            /*
             GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
             int width = gd.getDisplayMode().getWidth();
             int height = gd.getDisplayMode().getHeight();
+            */
+            int width = 0;
+            int height = 0;
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsDevice[]    gs = ge.getScreenDevices();
+            //StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < gs.length; i++) {
+                DisplayMode dm = gs[i].getDisplayMode();
+                //sb.append(i + ", width: " + dm.getWidth() + ", height: " + dm.getHeight() + "\n");
+                width += dm.getWidth();
+                height += dm.getHeight();
+            }
 
             JFrame frame = new JFrame();
             frame.getContentPane().add(new JLabel("Click anywhere on the screen to set the position of the mouse click", JLabel.CENTER));
@@ -470,17 +465,28 @@ public class GUI extends javafx.application.Application{
 
         //----------------------Mouse Menu----------------------------------------------
         Label keyboardInput = new Label("Text Input");
-        TextField textInput = new TextField();
+        javafx.scene.control.TextArea textInput = new javafx.scene.control.TextArea();
+
+        VBox textInputSet = new VBox(5);
+        textInputSet.getChildren().add(keyboardInput);
+        textInputSet.getChildren().add(textInput);
 
         Label TypeDelay = new Label("Type Delay");
         TextField typeDelay = new TextField();
-        clickDelay.setPromptText("Seconds");
-        clickDelay.setMinWidth(70);
-        clickDelay.setMaxWidth(70);
+        typeDelay.setPromptText("Seconds");
+        typeDelay.setMinWidth(70);
+        typeDelay.setMaxWidth(70);
+        typeDelay.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d{0,1}([\\.]\\d{0,2})?")) {
+                    typeDelay.setText(oldValue);
+                }
+            }
+        });
 
         VBox typeDelaySet = new VBox(5);
         typeDelaySet.getChildren().addAll(TypeDelay, typeDelay);
-
 
         Checkbox holdKey = new Checkbox("Key Hold");
 
@@ -488,7 +494,7 @@ public class GUI extends javafx.application.Application{
 
         VBox keyboardMenu = new VBox(5);
         keyboardMenu.setPadding(new Insets(10,12,15,0));
-        keyboardMenu.getChildren().addAll(keyboardInput, textInput);
+        keyboardMenu.getChildren().addAll(typeDelaySet, textInputSet);
 
         //----------------------Keyboard Menu-------------------------------------------
         Label delayLabel = new Label("Delay Time");
@@ -497,8 +503,8 @@ public class GUI extends javafx.application.Application{
         delayInput.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*")) {
-                    delayInput.setText(newValue.replaceAll("[^\\d]", ""));
+                if (!newValue.matches("\\d{0,3}")) {
+                    delayInput.setText(oldValue);
                 }
             }
         });
@@ -524,10 +530,7 @@ public class GUI extends javafx.application.Application{
                 confirm.setContentText("Are you sure you want to create this action?");
                 Optional<ButtonType> answer = confirm.showAndWait();
 
-                if (answer.isPresent() && answer.get() == ButtonType.OK){
-                    createActionButtons(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
-                    rightSide.getChildren().removeAll(mouseMenu, keyboardMenu, delayMenu);
-                }
+                ActionSettingUpdate(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, mouseButton, TimeClick, clickDelay, mousePosition, xPos, yPos, textInput, typeDelay, delayInput, answer);
             }
         });
 
@@ -540,7 +543,9 @@ public class GUI extends javafx.application.Application{
 
             if (answer.isPresent() && answer.get() == ButtonType.OK){
                 createActionButtons(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
-                rightSide.getChildren().removeAll(mouseMenu, keyboardMenu, delayMenu);
+                //rightSide.getChildren().removeAll(mouseMenu, keyboardMenu, delayMenu);
+
+                ActionSettingUpdate(ActionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, mouseButton, TimeClick, clickDelay, mousePosition, xPos, yPos, textInput, typeDelay, delayInput, answer);
             }
         });
 
@@ -565,9 +570,79 @@ public class GUI extends javafx.application.Application{
                     break;
             }
         });
+        ActionType.getSelectionModel().selectFirst();
+        mouseButton.setDisable(true);
+        TimeClick.setDisable(true);
+        clickDelay.setDisable(true);
+        mousePosition.setDisable(true);
+        xPos.setDisable(true);
+        yPos.setDisable(true);
+
+
+        addCommand.setOnAction(event -> {
+            //Add action
+            ActionType.setDisable(false);
+            createAction.setDisable(false);
+            cancelAction.setDisable(false);
+
+            addCommand.setDisable(true);
+            removeCommand.setDisable(true);
+            apply.setDisable(true);
+            cancel.setDisable(true);
+
+            if (ActionType.getSelectionModel().getSelectedItem().equals("Mouse Click")) {
+                mouseButton.setDisable(false);
+                TimeClick.setDisable(false);
+                clickDelay.setDisable(false);
+                mousePosition.setDisable(false);
+                xPos.setDisable(false);
+                yPos.setDisable(false);
+
+            } else if (ActionType.getSelectionModel().getSelectedItem().equals("Keyboard")) {
+                textInput.setDisable(false);
+                typeDelay.setDisable(false);
+            } else if (ActionType.getSelectionModel().getSelectedItem().equals("Delay")) {
+                delayInput.setDisable(false);
+            }
+        });
+
+        removeCommand.setOnAction(event -> {
+            //Remove action
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("RufuBot");
+            confirm.setHeaderText(null);
+            confirm.setContentText("Are you sure you want to remove the selected action?\n You cannot undo once the action is removed.");
+            Optional<ButtonType> answer = confirm.showAndWait();
+
+            if (answer.isPresent() && answer.get() == ButtonType.OK){
+
+            }
+
+        });
 
         Scene scene = new Scene(border, 800, 600);
         return scene;
+    }
+
+    private void ActionSettingUpdate(ChoiceBox<String> actionType, Button cancel, Button addCommand, Button removeCommand, Button apply, Button createAction, Button cancelAction, ChoiceBox<String> mouseButton, TextField timeClick, TextField clickDelay, Button mousePosition, TextField xPos, TextField yPos, TextArea textInput, TextField typeDelay, TextField delayInput, Optional<ButtonType> answer) {
+        if (answer.isPresent() && answer.get() == ButtonType.OK){
+            createActionButtons(actionType, cancel, addCommand, removeCommand, apply, createAction, cancelAction, answer);
+            //rightSide.getChildren().removeAll(mouseMenu, keyboardMenu, delayMenu);
+            if (actionType.getSelectionModel().getSelectedItem().equals("Mouse Click")) {
+                mouseButton.setDisable(true);
+                timeClick.setDisable(true);
+                clickDelay.setDisable(true);
+                mousePosition.setDisable(true);
+                xPos.setDisable(true);
+                yPos.setDisable(true);
+
+            } else if (actionType.getSelectionModel().getSelectedItem().equals("Keyboard")) {
+                textInput.setDisable(true);
+                typeDelay.setDisable(true);
+            } else if (actionType.getSelectionModel().getSelectedItem().equals("Delay")) {
+                delayInput.setDisable(true);
+            }
+        }
     }
 
     private void backToProfiles(TableView table, ComboBox<String> profiles, ChoiceBox<String> actionType, Button proceed, Button newProfile, Button deleteProfile, Button editProfile, Button cancel, Button addCommand, Button removeCommand, Button apply, Optional<ButtonType> answer) {
